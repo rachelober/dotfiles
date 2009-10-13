@@ -1,3 +1,7 @@
+#--------------------------------------------------------------------------
+# ccs specific stuff
+#--------------------------------------------------------------------------
+
 if [ -d /ccs ]; then
 	export PATH=/arch/beta/bin:/usr/xpg4/bin:$PATH
 	export MANPATH=/priv/unix/packages/zsh-4.0.6/man:/priv/unix/packages/zsh-4.0.4/man:$MANPATH

@@ -9,7 +9,7 @@
 . ~/.zsh/keybindings.zsh
 . ~/.zsh/leopard.zsh
 . ~/.zsh/linux.zsh
-. ~/.zsh/term.zsh
+#. ~/.zsh/term.zsh
 
 # source the local config
 [[ -f ~/.zsh_local ]] && .  ~/.zsh_local

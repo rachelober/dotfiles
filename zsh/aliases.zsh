@@ -1,3 +1,7 @@
+#--------------------------------------------------------------------------
+# aliases
+#--------------------------------------------------------------------------
+
 # zsh config installer
 alias ZshInstall='curl -s zsh.rachelober.com | sh ; . ~/.zshrc'
 alias ZshRehash='. ~/.zshrc'
