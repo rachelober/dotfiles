@@ -21,13 +21,6 @@ export LS_COLORS='no=00:fi=00:di=01;34:ln=01;36:pi=33:so=01;35:bd=33;01:cd=33;01
 export LSCOLORS='ExGxFxdxCxDxDxcxcxxCxc'
 export CLICOLOR=1
 
-# Linux colors
-if _is Linux; then
-    if _try ls --color; then
-        alias ls='ls --color[=always]'
-    fi
-fi
-
 # Utility variables.
 if which hostname >/dev/null 2>&1; then
   HOSTNAME=`hostname`
@@ -45,6 +38,13 @@ else
   HOSTTYPE=unknown
 fi
 export HOSTTYPE
+
+# Linux colors
+if _is Linux; then
+    if _try ls --color; then
+        alias ls='ls --color'
+    fi
+fi
 
 # PAGER
 if _has less; then
