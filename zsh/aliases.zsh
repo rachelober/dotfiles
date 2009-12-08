@@ -2,11 +2,6 @@
 # aliases
 #--------------------------------------------------------------------------
 
-# zsh config installer
-alias ZshInstall='curl -s zsh.rachelober.com | sh ; . ~/.zshrc'
-alias ZshRehash='. ~/.zshrc'
-                # ; for file in ~/.zsh/[[:alnum:]]*.zsh; zcompile -M $file'
-
 # servers
 alias corvus='ssh -l rober 192.168.0.101'
 alias cygnus='ssh -l rober 192.168.0.102'

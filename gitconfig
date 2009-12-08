@@ -1,18 +1,42 @@
 [user]
 	name = Rachel Ober
-	email = rachel@signalpatterns.com
+	email = rachelober@gmail.com
 
 [alias]
+	ci = commit -a
 	co = checkout
+	st = status -a
+	praise = blame
+	br = branch
+	df = diff
+	lg = log -p
+	rb = rebase
+
+[apply]
+	whitespace = strip
 
 [color]
 	diff = auto
 	status = auto
 	branch = auto
 
+[diff]
+	color = auto
+	rename = copy
+
+[pager]
+	color = true
+
+[status]
+	color = auto
+
 [core]
 	excludesfile = ~/.gitignore
 	editor = mate -w
 
-[apply]
-	whitespace = nowarn
+[github]
+	user = rachelober
+	token = 1b3aeb4b0e1817ae1e7b600d158fae6b
+	
+[merge]
+	tool = opendiff
