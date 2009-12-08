@@ -21,18 +21,8 @@ function _ssh_hosts () {
   fi
 }
  
-# Set up ssh agent if I've been using `keychain`.
-for cmd in ~/bin/keychain /usr/bin/keychain; do
-    if [ -x "$cmd" ]; then
-        keychainbin=$cmd
-        break
-    fi
-done
-if [ -n $keychainbin ]; then
-    if [ -e  ~/.keychain/${HOSTNAME}-sh ]; then
-        source ~/.keychain/${HOSTNAME}-sh >/dev/null 2>&1
-    fi
-    alias agent="$keychainbin id_dsa && source ~/.keychain/$HOST-sh"
-else
-    alias agent="echo command not found: keychain"
-fi
+#!/bin/bash
+#on this next line, we start keychain and point it to the private keys that
+#we'd like it to cache
+/usr/bin/keychain ~/.ssh/id_rsa ~/.ssh/id_dsa
+source ~/.ssh-agent > /dev/null
