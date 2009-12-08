@@ -24,5 +24,5 @@ function _ssh_hosts () {
 #!/bin/bash
 #on this next line, we start keychain and point it to the private keys that
 #we'd like it to cache
-/usr/bin/keychain ~/.ssh/id_rsa ~/.ssh/id_dsa
+/usr/bin/keychain ~/.ssh/id_rsa
 source ~/.ssh-agent > /dev/null
