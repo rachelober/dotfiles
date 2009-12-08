@@ -7,7 +7,6 @@
 . ~/.zsh/environment.zsh
 . ~/.zsh/aliases.zsh
 . ~/.zsh/comp.zsh
-. ~/.zsh/keybindings.zsh
 . ~/.zsh/leopard.zsh
 . ~/.zsh/linux.zsh
 #. ~/.zsh/term.zsh
