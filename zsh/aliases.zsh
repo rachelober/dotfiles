@@ -59,3 +59,8 @@ done
 if [[ "$HOSTTYPE" != "Linux" ]]; then
     alias top='top -u'
 fi
+
+# Mac OS X doesn't come with wget.
+if ! _has wget; then
+    alias wget='curl -O'
+fi

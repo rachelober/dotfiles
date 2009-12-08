@@ -3,6 +3,7 @@
 #--------------------------------------------------------------------------
 
 # source all the configs in .zsh
+. ~/.zsh/functions.zsh
 . ~/.zsh/environment.zsh
 . ~/.zsh/aliases.zsh
 . ~/.zsh/comp.zsh

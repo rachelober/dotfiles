@@ -10,6 +10,8 @@ Dir['*'].each do |file|
   `ln -s #{File.expand_path file} #{target}`
 end
 
+`touch ~/.zhistory`
+
 # git push on commit
 `echo 'git push' > .git/hooks/post-commit`
 `chmod 755 .git/hooks/post-commit`
