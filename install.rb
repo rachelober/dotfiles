@@ -5,7 +5,7 @@
 home = File.expand_path('~')
 
 Dir['*'].each do |file|
-  next if file =~ /install|Dot-Files|vim|zsh/
+  next if file =~ /install|Dot-Files/
   target = File.join(home, ".#{file}")
   `ln -s #{File.expand_path file} #{target}`
 end
