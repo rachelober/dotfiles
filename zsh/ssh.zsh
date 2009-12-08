@@ -22,7 +22,7 @@ function _ssh_hosts () {
 }
 
 # Set up ssh agent if I've been using `keychain`.
-for cmd in ~/bin/keychain /usr/bin/keychain; do
+for cmd in ~/bin/keychain.sh ~/bin/keychain /usr/bin/keychain; do
     if [ -x "$cmd" ]; then
         keychainbin=$cmd
         break
