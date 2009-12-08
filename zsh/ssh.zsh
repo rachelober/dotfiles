@@ -21,24 +21,18 @@ function _ssh_hosts () {
   fi
 }
  
-SSH_ENV="$HOME/.ssh/environment"
-
-function start_agent {
-  echo "Initializing new SSH agent..."
-  /usr/bin/ssh-agent | sed 's/^echo/#echo/' > "${SSH_ENV}"
-  echo succeeded
-  chmod 600 "${SSH_ENV}"
-  . "${SSH_ENV}" > /dev/null
-  /usr/bin/ssh-add;
-}
-
-# Source SSH settings, if applicable
-if [ -f "${SSH_ENV}" ]; then
-  . "${SSH_ENV}" > /dev/null
-  #ps ${SSH_AGENT_PID} doesn't work under cywgin
-  ps -ef | grep ${SSH_AGENT_PID} | grep ssh-agent$ > /dev/null || {
-    start_agent;
-  }
+# Set up ssh agent if I've been using `keychain`.
+for cmd in ~/bin/keychain /usr/bin/keychain; do
+    if [ -x "$cmd" ]; then
+        keychainbin=$cmd
+        break
+    fi
+done
+if [ -n $keychainbin ]; then
+    if [ -e  ~/.keychain/${HOSTNAME}-sh ]; then
+        source ~/.keychain/${HOSTNAME}-sh >/dev/null 2>&1
+    fi
+    alias agent="$keychainbin id_dsa && source ~/.keychain/$HOST-sh"
 else
-  start_agent;
+    alias agent="echo command not found: keychain"
 fi
