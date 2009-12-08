@@ -4,8 +4,17 @@
 
 export PS1=$'[%{\e[1;31m%}%*%{\e[0m%}][%{\e[1;35m%}%~%{\e[0m%}][%{\e[1;32m%}%n@%m%{\e[0m%}]\n%% '
 export TERM=rxvt
-export PATH="~/bin:~/www/bin:/usr/local/bin:/usr/local/sbin:/usr/local/mysql/bin:/usr/local/git/bin:$PATH"
+
 export MANPATH="/usr/local/man:/usr/local/mysql/man:/usr/local/git/man:$MANPATH"
+
+_prepend_to_path ~/bin
+_prepend_to_path ~/www/bin
+_prepend_to_path /usr/local/bin
+_prepend_to_path /usr/local/sbin
+ 
+_append_to_path /usr/local/mysql/bin
+_append_to_path /usr/local/git/bin
+_append_to_path /usr/sbin
 
 # GNU grep
 export GREP_OPTIONS='--color=auto'
@@ -71,49 +80,3 @@ fi
 for i in /usr/local/pgsql/data /var/lib/postgresql/data; do
   [ -d $i ] && export PGDATA=$i
 done
-
-#--------------------------------------------------------------------------
-# options
-#--------------------------------------------------------------------------
-
-# Changing Directories
-setopt auto_cd
-setopt auto_pushd
-setopt pushd_ignore_dups
-setopt pushd_silent
- 
-# Completion
-setopt auto_param_slash
-setopt glob_complete
-setopt list_beep
-setopt list_packed
-setopt list_rows_first
-setopt no_beep
- 
-# History
-setopt append_history
-unsetopt bang_hist
-unsetopt extended_history
- 
-# Job Control
-setopt notify
- 
-# Input/Output
-unsetopt clobber
-
-#--------------------------------------------------------------------------
-# history
-#--------------------------------------------------------------------------
-
-SAVEHIST=100000
-HISTSIZE=100000
-HISTFILE=~/.zsh_history
-REPORTTIME=10 # print elapsed time when more than 10 seconds
-
-# make sure history file isn't owned by root
-# (a common problem)
-if [ -n "$HISTFILE" -a ! -w $HISTFILE ]; then
-  echo
-  echo "[31;1;5m HISTFILE [$HISTFILE] not writable! [0m"
-  echo
-fi

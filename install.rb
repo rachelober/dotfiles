@@ -5,12 +5,13 @@
 home = File.expand_path('~')
 
 Dir['*'].each do |file|
-  next if file =~ /install/
+  next if file =~ /install|Dot-Files|vim|zsh/
   target = File.join(home, ".#{file}")
   `ln -s #{File.expand_path file} #{target}`
 end
 
-`touch ~/.zhistory`
+# create a history file
+`touch ~/.zsh_history`
 
 # git push on commit
 `echo 'git push' > .git/hooks/post-commit`
