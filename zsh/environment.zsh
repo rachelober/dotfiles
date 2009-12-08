@@ -24,7 +24,7 @@ export CLICOLOR=1
 # Linux colors
 if _is Linux; then
     if _try ls --color; then
-        alias ls='ls --color'
+        alias ls='ls --color[=always]'
     fi
 fi
 
