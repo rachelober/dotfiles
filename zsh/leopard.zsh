@@ -1,7 +1,3 @@
-#--------------------------------------------------------------------------
-# Mac OS X settings
-#--------------------------------------------------------------------------
-
 # Postgres for Mac OS X
 if [ -x /usr/local/pgsql ]; then
 	export PATH=/usr/local/pgsql/bin:$PATH

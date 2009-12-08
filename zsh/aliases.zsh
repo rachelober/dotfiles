@@ -1,7 +1,3 @@
-#--------------------------------------------------------------------------
-# aliases
-#--------------------------------------------------------------------------
-
 # servers
 alias corvus='ssh -l rober 192.168.0.101'
 alias cygnus='ssh -l rober 192.168.0.102'
@@ -64,3 +60,13 @@ fi
 if ! _has wget; then
     alias wget='curl -O'
 fi
+
+# Linux
+alias Ag='sudo apt-get install'
+alias As='apt-cache search'
+alias Ai='apt-cache show'
+alias Ar='sudo apt-get remove'
+alias Arp='sudo apt-get remove --purge'
+alias dsl='dpkg -l | grep -i'
+alias dls='dpkg -L'
+alias linuxlogs='tail -f /var/log/*.log'
