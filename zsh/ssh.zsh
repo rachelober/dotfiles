@@ -20,9 +20,43 @@ function _ssh_hosts () {
       done < "$HOME/.ssh/config"
   fi
 }
+
+# Set up ssh agent if I've been using `keychain`.
+for cmd in ~/bin/keychain /usr/bin/keychain; do
+    if [ -x "$cmd" ]; then
+        keychainbin=$cmd
+        break
+    fi
+done
+if [ -n $keychainbin ]; then
+    if [ -e  ~/.keychain/${HOSTNAME}-sh ]; then
+        source ~/.keychain/${HOSTNAME}-sh >/dev/null 2>&1
+    fi
+    alias agent="$keychainbin id_dsa && source ~/.keychain/$HOST-sh"
+else
+    alias agent="echo command not found: keychain"
+fi
  
-#!/bin/bash
-#on this next line, we start keychain and point it to the private keys that
-#we'd like it to cache
-/usr/bin/keychain ~/.ssh/id_rsa
-source ~/.ssh-agent > /dev/null
+# A problem with screen is that old sessions lose ssh-agent awareness. This
+# little system fixes it.
+function {
+    local agentdir=~/.latestssh
+    local agentfile=$agentdir/$HOST.sh
+ 
+    mkdir -p $agentdir
+    chmod 0700 $agentdir >/dev/null
+ 
+    if [ -n "$SSH_AUTH_SOCK" -a -z $STY ]; then
+        rm -f $agentfile >/dev/null
+        echo "export SSH_AUTH_SOCK=$SSH_AUTH_SOCK" >$agentfile
+        chmod 0600 $agentfile >/dev/null
+    fi
+ 
+    # ...existing windows can run this alias
+    alias latestssh="source $agentfile; ls \$SSH_AUTH_SOCK"
+ 
+    # ...new windows get it automatically
+    if [ -n "$STY" ]; then
+        source $agentfile
+    fi
+}
