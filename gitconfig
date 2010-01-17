@@ -31,7 +31,7 @@
 	color = auto
 
 [core]
-	excludesfile = ~/.gitignore
+	excludesfile = /Users/rober/.gitignore
 	editor = mate -w
 
 [github]
