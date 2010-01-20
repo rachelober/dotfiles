@@ -1,7 +1,8 @@
 # servers
-alias corvus='ssh -l rober 192.168.0.101'
-alias cygnus='ssh -l rober 192.168.0.102'
-alias pyxis='ssh -l rober 192.168.0.103'
+# TODO: Home computer ips are all out of date, should update these eventually
+# alias corvus='ssh -l rober 192.168.0.101'
+# alias cygnus='ssh -l rober 192.168.0.102'
+# alias pyxis='ssh -l rober 192.168.0.103'
 alias rhul='ssh -l brightpromise landofrhul.com'
 alias smithers='ssh -l rober rachelober.com'
 alias tunnel='ssh -D 5222 rober@zerowing.ccs.neu.edu'
