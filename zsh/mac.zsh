@@ -15,16 +15,15 @@ if [ -x /opt/local/bin/port ]; then
 	alias dsl='port installed | grep -i'
 
 	function InitMacports () {
-    	cmds=(
-        	cat chgrp chmod chown cp dd df diff du false head
-        	ln ls mkdir mkfifo mv pwd rm rmdir sleep sort
-        	stat tail tee true uniq who whoami yes
-        )
-
-    	for cmd in $cmds; do
-        	ln -vs /opt/local/bin/g$cmd /usr/local/bin/$cmd
-    	done
-	}
+		cmds=(
+		cat chgrp chmod chown cp dd df diff du false head
+		ln ls mkdir mkfifo mv pwd rm rmdir sleep sort
+		stat tail tee true uniq who whoami yes
+		
+		for cmd in $cmds; do
+			ln -vs /opt/local/bin/g$cmd /usr/local/bin/$cmd
+		done
+		
 fi
 
 # Fink for Mac OS X

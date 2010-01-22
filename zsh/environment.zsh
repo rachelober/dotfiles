@@ -41,23 +41,23 @@ export HOSTTYPE
 
 # Linux colors
 if _is Linux; then
-    if _try ls --color; then
-        alias ls='ls --color=auto'
-    fi
+	if _try ls --color; then
+		alias ls='ls --color=auto'
+	fi
 fi
 
 # PAGER
 if _has less; then
-    export PAGER=less
+	export PAGER=less
 fi
 
 # EDITOR
 if _has mate; then
-	export EDITOR=mate VISUAL=mate
+	export EDITOR=`mate -w` VISUAL=mate
 elif _has vim; then
-  export EDITOR=vim VISUAL=vim
+	export EDITOR=vim VISUAL=vim
 elif _has vi; then
-  export EDITOR=vi VISUAL=vi
+	export EDITOR=vi VISUAL=vi
 fi
 
 # GNU grep
