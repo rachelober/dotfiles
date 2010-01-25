@@ -4,7 +4,7 @@
 . ~/.zsh/aliases.zsh
 . ~/.zsh/comp.zsh
 . ~/.zsh/history.zsh
-. ~/.zsh/leopard.zsh
+. ~/.zsh/mac.zsh
 . ~/.zsh/options.zsh
 
 # source the local config

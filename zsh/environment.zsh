@@ -53,7 +53,7 @@ fi
 
 # EDITOR
 if _has mate; then
-	export EDITOR=`mate -w` VISUAL=mate
+	export EDITOR='mate -w' VISUAL=mate
 elif _has vim; then
 	export EDITOR=vim VISUAL=vim
 elif _has vi; then
