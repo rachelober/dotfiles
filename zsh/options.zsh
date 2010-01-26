@@ -26,3 +26,6 @@ setopt notify
  
 # Input/Output
 unsetopt clobber
+
+# Variable prompt
+setopt promptsubst

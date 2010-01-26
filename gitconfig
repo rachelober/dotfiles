@@ -31,8 +31,9 @@
 	color = auto
 
 [core]
-	excludesfile = /Users/rober/.gitignore
-	editor = mate -w
+  # git has to be updated in order to use relative path rather than absolute
+	excludesfile = ~/.gitignore
+  editor = "mate -w"
 
 [github]
 	user = rachelober

@@ -1,11 +1,11 @@
 # !/usr/bin/env ruby
 
-# from http://errtheblog.com/posts/89-huba-huba
+# referenced http://errtheblog.com/posts/89-huba-huba
 
 home = File.expand_path('~')
 
 Dir['*'].each do |file|
-  next if file =~ /install|Dot-Files/
+  next if file =~ /install|Dot-Files|README/
   target = File.join(home, ".#{file}")
   `ln -s #{File.expand_path file} #{target}`
 end
