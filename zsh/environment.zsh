@@ -1,4 +1,5 @@
-export PS1=$'[%{\e[1;31m%}%*%{\e[0m%}][%{\e[1;35m%}%~%{\e[0m%}][%{\e[1;32m%}%n@%m%{\e[0m%}]\n%% '
+export PS1=$'[%{\e[1;31m%}%*%{\e[0m%}][%{\e[1;35m%}%~%{\e[0m%}][%{\e[1;32m%}%n@%m%{\e[0m%}][\$(zgit_branch)]\n%% '
+
 export TERM=rxvt
 
 export MANPATH="/usr/local/man:/usr/local/mysql/man:/usr/local/git/man:$MANPATH"

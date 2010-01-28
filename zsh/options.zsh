@@ -9,6 +9,7 @@ setopt pushd_ignore_dups
 setopt pushd_silent
  
 # Completion
+setopt aliases
 setopt auto_param_slash
 setopt glob_complete
 setopt list_beep
@@ -29,3 +30,6 @@ unsetopt clobber
 
 # Variable prompt
 setopt promptsubst
+typeset -ga preexec_functions
+typeset -ga precmd_functions
+typeset -ga chpwd_functions
