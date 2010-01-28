@@ -3,7 +3,7 @@
 	email = rachelober@gmail.com
 
 [alias]
-	ci = commit -a
+	ci = commit -a -v
 	co = checkout
 	st = status -a
 	praise = blame
@@ -31,13 +31,11 @@
 	color = auto
 
 [core]
-  # git has to be updated in order to use relative path rather than absolute
 	excludesfile = ~/.gitignore
   editor = "mate -w"
 
 [github]
 	user = rachelober
-	token = 1b3aeb4b0e1817ae1e7b600d158fae6b
 	
 [merge]
 	tool = opendiff
