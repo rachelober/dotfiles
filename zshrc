@@ -1,6 +1,5 @@
 # source all the configs in .zsh
 . ~/.zsh/functions.zsh
-#. ~/.zsh/git.zsh
 . ~/.zsh/environment.zsh
 . ~/.zsh/aliases.zsh
 . ~/.zsh/comp.zsh

@@ -1,3 +1,7 @@
+#--------------------------------------------------------------------------
+# functions
+#--------------------------------------------------------------------------
+
 if [ -e ~/.zshdebug ]; then
   function LOG () { echo "[36;1m# $*[0m" }
 else
@@ -34,10 +38,8 @@ function _append_to_path() {
   fi
 }
 
-##
-## Load with `autoload -U zgitinit; zgitinit'
-##
-
+# adding git repository information to terminal
+# http://github.com/jcorbin/zsh-git
 typeset -gA zgit_info
 zgit_info=()
 

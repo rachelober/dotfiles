@@ -1,3 +1,7 @@
+#--------------------------------------------------------------------------
+# aliases
+#--------------------------------------------------------------------------
+
 # hosts
 # TODO: Home computer ips are all out of date, should update these eventually
 # alias corvus='ssh -l rober 192.168.0.101'
@@ -18,7 +22,7 @@ alias ZshReinstall='ruby ~/Development/Dot-Files/uninstall.rb; ruby ~/Developmen
 alias ZshSource='. ~/.zshrc'
 
 # open up specific projects
-alias dot='mate ~/Development/Dot-Files'
+alias dot='cd ~/Development/Dot-Files'
  
 # ls
 alias ls='ls -F'
@@ -35,8 +39,10 @@ alias gc='git commit -v'
 alias gca='git commit -a -v'
 alias gco='git checkout'
 alias gb='git branch'
+alias gbr='git branch -r'
+alias gba='git branch -a'
 alias gs='git status'
-alias grm='git status | grep deleted | awk '{print \$3}' | xargs git rm'
+alias grm='git status | grep deleted | awk "{print \$3}" | xargs git rm'
  
 # rails
 alias sc='script/console'
@@ -53,7 +59,7 @@ alias df='df -h'
 alias mv='mv -i'
 alias rm='rm -i'
 for c in cp rm chmod chown; do
-	alias $c='$c -v'
+	alias $c="$c -v"
 done
 
 # try to get top to sort by CPU usage
