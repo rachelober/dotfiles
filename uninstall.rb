@@ -3,7 +3,7 @@
 home = File.expand_path('~')
 
 Dir['*'].each do |file|
-  next if file =~ /install|Dot-Files|README/
+  next if file =~ /install|dotfiles|README/
   target = File.join(home, ".#{file}")
   `rm #{target}`
 end
