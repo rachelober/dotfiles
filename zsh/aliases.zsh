@@ -18,11 +18,11 @@ alias zerowing='ssh -l rober zerowing.ccs.neu.edu'
 alias ..='cd ..'
 alias dev='cd ~/Development'
 alias wtf='whoami | ps u'
-alias ZshReinstall='ruby ~/Development/Dot-Files/uninstall.rb; ruby ~/Development/Dot-Files/install.rb;'
+alias ZshReinstall='ruby ~/Development/dotfiles/uninstall.rb; ruby ~/Development/dotfiles/install.rb;'
 alias ZshSource='. ~/.zshrc'
 
 # open up specific projects
-alias dot='cd ~/Development/Dot-Files'
+alias dot='cd ~/Development/dotfiles'
  
 # ls
 alias ls='ls -F'
