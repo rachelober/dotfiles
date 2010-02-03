@@ -4,7 +4,6 @@
 
 export PROMPT=$'[%{\e[1;31m%}%*%{\e[0m%}][%{\e[1;35m%}%~%{\e[0m%}][%{\e[1;32m%}%n@%m%{\e[0m%}][%{\e[1;33m%}~\$(zgit_branch)%{\e[0m%}]\n%% '
 
-
 export TERM=rxvt
 
 export MANPATH="/usr/local/man:/usr/local/mysql/man:/usr/local/git/man:$MANPATH"
@@ -44,13 +43,6 @@ else
   HOSTTYPE=unknown
 fi
 export HOSTTYPE
-
-# Linux colors
-if _is Linux; then
-	if _try ls --color; then
-		alias ls='ls --color=auto'
-	fi
-fi
 
 # PAGER
 if _has less; then

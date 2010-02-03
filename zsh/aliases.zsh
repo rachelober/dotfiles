@@ -82,4 +82,5 @@ if _is Linux; then
   alias dsl='dpkg -l | grep -i'
   alias dls='dpkg -L'
   alias linuxlogs='tail -f /var/log/*.log'
+  alias ls='ls --color=auto'
 fi
