@@ -23,6 +23,7 @@ alias ZshSource='. ~/.zshrc'
 
 # open up specific projects
 alias dot='cd ~/Development/dotfiles'
+alias dupe='cd ~/Development/dupe'
  
 # ls
 alias ls='ls -F'
