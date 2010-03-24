@@ -1,4 +1,4 @@
-# source all the configs in .zsh
+# source all the configs in .zsh (in the correct order)
 . ~/.zsh/functions.zsh
 . ~/.zsh/environment.zsh
 . ~/.zsh/aliases.zsh
