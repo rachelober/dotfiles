@@ -22,6 +22,7 @@ alias wtf='whoami | ps u'
 # open up specific projects
 alias dot='cd ~/Development/dotfiles'
 alias dupe='cd ~/Development/dupe'
+alias girl='cd ~/Development/girlscout'
  
 # ls
 alias ls='ls -F'
