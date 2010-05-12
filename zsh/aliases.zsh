@@ -9,7 +9,7 @@
 # alias pyxis='ssh -l rober 192.168.0.103'
 alias rhul='ssh -l brightpromise landofrhul.com'
 alias smithers='ssh -l rober rachelober.com'
-alias tunnel='ssh -D 5222 -l rober zerowing.ccs.neu.edu'
+alias tunnel='zerowing -D 5222'
 alias utopia='zerowing'
 alias v2s='ssh -l rober v2s.org'
 alias zerowing='ssh -l rober zerowing.ccs.neu.edu'
