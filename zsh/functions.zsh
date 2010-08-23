@@ -34,7 +34,7 @@ function _prepend_to_path() {
  
 function _append_to_path() {
   if [ -d $1 -a -z ${path[(r)$1]} ]; then
-    path=($1 $path);
+    path=($path $1);
   fi
 }
 
