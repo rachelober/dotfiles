@@ -11,7 +11,4 @@
 [[ -f ~/.zsh_local ]] && .  ~/.zsh_local
 
 # source rvm
-if [[ -s ~/.rvm/scripts/rvm ]] ; then source ~/.rvm/scripts/rvm ; fi
-
-# don't end with errors
-true
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"

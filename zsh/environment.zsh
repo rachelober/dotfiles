@@ -12,10 +12,10 @@ _prepend_to_path ~/bin
 _prepend_to_path ~/www/bin
 _prepend_to_path /usr/local/bin
 _prepend_to_path /usr/local/sbin
- 
 _append_to_path /usr/local/mysql/bin
 _append_to_path /usr/local/git/bin
 _append_to_path /usr/sbin
+_append_to_path /usr/bin
 
 # GNU grep
 export GREP_OPTIONS='--color=auto'

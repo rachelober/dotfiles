@@ -9,7 +9,8 @@ fi
  
 # Macports for Mac OS X
 if [ -x /opt/local/bin/port ]; then
-  export PATH=$PATH:/opt/local/bin:/opt/local/sbin
+  _append_to_path /opt/local/bin
+  _append_to_path /opt/local/sbin
   export MANPATH=/opt/local/share/man:$MANPATH
   
   alias Pg='sudo port -v install'
@@ -33,5 +34,5 @@ fi
  
 # Fink for Mac OS X
 if [ -x /sw/bin/init.sh ]; then
-  export PATH=$PATH:/sw/bin/init.sh
+  _append_to_path /sw/bin/init.sh
 fi
