@@ -8,7 +8,7 @@
 # alias cygnus='ssh -l rober 192.168.0.102'
 # alias pyxis='ssh -l rober 192.168.0.103'
 alias rhul='ssh -l brightpromise landofrhul.com'
-alias smithers='ssh -l rober rachelober.com'
+alias ro='ssh -l rober rachelober.com'
 alias tunnel='zerowing -D 5222'
 alias utopia='zerowing'
 alias v2s='ssh -l rober v2s.org'
@@ -20,9 +20,12 @@ alias dev='cd ~/Development'
 alias wtf='whoami | ps u'
 
 # open up specific projects
+alias blog='cd ~~/Development/Blogenning'
 alias dot='cd ~/Development/dotfiles'
 alias dupe='cd ~/Development/dupe'
+alias elaria='cd ~Development/Elaria'
 alias girl='cd ~/Development/girlscout'
+alias lor='cd ~/Development/The Land of Rhul'
  
 # ls
 alias ls='ls -F'
