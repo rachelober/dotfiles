@@ -16,9 +16,7 @@
 	whitespace = strip
 
 [color]
-	diff = auto
-	status = auto
-	branch = auto
+	ui = true
 
 [color "diff"]
   meta = blue
