@@ -1,0 +1,41 @@
+[user]
+	name = Rachel Ober
+	email = rachelober@gmail.com
+
+[alias]
+	ci = commit -a -v
+	co = checkout
+	st = status -a
+	praise = blame
+	br = branch
+	df = diff
+	lg = log -p
+	rb = rebase
+
+[apply]
+	whitespace = strip
+
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+
+[diff]
+	color = auto
+	rename = copy
+
+[pager]
+	color = true
+
+[status]
+	color = auto
+
+[core]
+	excludesfile = ~/.gitignore
+	editor = "mvim"
+
+[github]
+	user = rachelober
+	
+[merge]
+	tool = opendiff

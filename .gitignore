@@ -1,0 +1,10 @@
+.DS_Store
+.svn
+*~
+*.tmproj
+log/*.log
+tmp/**/*
+public/cache/**/*
+doc/api
+doc/app
+.swp

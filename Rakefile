@@ -5,10 +5,10 @@ require 'rake'
 desc "install dotfiles to home directory"
 task :install do
   Dir['*'].each do |file|
-    next if %w{ Rakefile README dotfiles.tmproj }.include? file
+    next if %w{ Rakefile README.markdown dotfiles.tmproj }.include? file
     
-    # remove the old file
-    system %Q{rm "$HOME/.#{file}"}
+    # move the old file
+    system %Q{mv "$HOME/.#{file}.old"}
     
     # make a symbolic link to the new file
     puts "Linking ~/.#{file}"
