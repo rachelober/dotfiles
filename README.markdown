@@ -6,10 +6,10 @@ I'm a Ruby on Rails developer and use vim. These include some helpful shortcuts 
 
 ## Install
 
-    wget --no-check-certificate https://raw.github.com/rachelober/dotfiles/master/tools/install.sh -O - | sh
+    curl https://raw.github.com/rachelober/dotfiles/master/tools/install.sh | sh
 
 ## Shell dotfiles
 
 This doesn't include any dotfiles for shells. Therefore it integrates well with zsh/tcsh/bash. Personally, I use [my own fork of oh-my-zsh](https://github.com/rachelober/oh-my-zsh) and therefore run this command after bootstrapping.
 
-    wget --no-check-certificate https://raw.github.com/rachelober/oh-my-zsh/master/tools/install.sh -O - | sh
+    curl https://raw.github.com/rachelober/oh-my-zsh/master/tools/install.sh | sh
