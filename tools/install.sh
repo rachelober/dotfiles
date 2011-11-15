@@ -1,21 +1,50 @@
-if [ -d ~/.dotfiles ]
+dotfiles=$HOME/.dotfiles
+gitrepo=https://github.com/rachelober/dotfiles.git
+
+function log() {
+	echo "\033[32;1m$*...\033[0m"
+}
+
+function warning() {
+	echo "\033[31;1m$*...\033[0m"
+}
+
+function link() {
+	src=$1
+	dest=$2
+	
+	if [ -e $dest ]; then
+		if [ -s $dest ]; then
+			# Already symlinked -- I'll assume correctly.
+			return
+		else
+			# Rename files with a ".old" extension.
+			warning "$dest file already exists, renaming to $dest.old"
+			backup=$dest.old
+			mv -v $dest $backup
+		fi
+	fi
+
+	log "Linking $src"
+  ln -vsf $src $dest
+}
+
+cd $dotfiles
+
+if [ -e $dotfiles ]
 then
-  echo "\033[0;33mYou already have dotfiles installed.\033[0m You'll need to remove ~/.dotfiles if you want to install"
-  exit
+  warning "You already have dotfiles installed. Updating from git"
+	git pull --rebase origin master
 fi
 
-echo "\033[0;34mCloning dotfiles...\033[0m"
-/usr/bin/env git clone https://github.com/rachelober/dotfiles.git ~/.dotfiles
-
-echo "\033[0;34mMoving existing dotfiles...\033[0m"
-for f in ~/.dotfiles/*
-do
-	echo "Processing $f..."
-	if [ -f ~/.$f ] || [ -h ~/.$f ]
-	then
-		echo "Moving .$f file to .$f.old..."
-		cp ~/.$f ~/.$f.old;
-	fi
-	echo "Linking new .$f..."
-	ln -s ~/.dotfiles/$f ~/.$f;
+log "Installing dotfiles"
+for path in .* ; do
+	case $path in
+		.|..|.git)
+			continue
+			;;
+		*)
+			link $dotfiles/$path $HOME/$path
+			;;
+	esac
 done

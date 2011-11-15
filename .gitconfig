@@ -21,18 +21,26 @@
 	branch = auto
 
 [diff]
-	color = auto
-	rename = copy
+  meta = blue
+  frag = black
+  old = red
+  new = green
+  rename = copy
 
 [pager]
 	color = true
 
 [status]
-	color = auto
-
+  added = green
+  changed = yellow
+  untracked = cyan
+[branch]
+  current = yellow reverse
+  local = yellow
+  untracked = cyan
 [core]
 	excludesfile = ~/.gitignore
-	editor = "mvim"
+	editor = vim
 
 [github]
 	user = rachelober
