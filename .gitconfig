@@ -20,7 +20,7 @@
 	status = auto
 	branch = auto
 
-[diff]
+[color "diff"]
   meta = blue
   frag = black
   old = red
@@ -30,11 +30,11 @@
 [pager]
 	color = true
 
-[status]
+[color "status"]
   added = green
   changed = yellow
   untracked = cyan
-[branch]
+[color "branch"]
   current = yellow reverse
   local = yellow
   untracked = cyan
