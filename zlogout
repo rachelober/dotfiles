@@ -1,1 +1,0 @@
-print -N "\e[2J\e[H"

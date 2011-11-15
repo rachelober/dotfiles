@@ -7,4 +7,3 @@
 gem: --no-ri --no-rdoc
 :sources: 
 - http://rubygems.org/
-- http://gems.amexpub.com/
