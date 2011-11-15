@@ -1,7 +1,9 @@
 [user]
 	name = Rachel Ober
 	email = rachelober@gmail.com
-
+[core]
+	excludesfile = ~/.gitignore
+	editor = vim
 [alias]
 	ci = commit -a -v
 	co = checkout
@@ -11,38 +13,32 @@
 	df = diff
 	lg = log -p
 	rb = rebase
-
 [apply]
 	whitespace = strip
-
 [color]
 	ui = true
-
+  interactive = true
+[color "branch"]
+  current = yellow reverse
+  local = yellow
+  untracked = cyan
 [color "diff"]
   meta = blue
   frag = black
   old = red
   new = green
-  rename = copy
-
-[pager]
-	color = true
-
+  renames = copy
 [color "status"]
   added = green
-  changed = yellow
+  updated = yellow
+  changed = yellow reverse
   untracked = cyan
-[color "branch"]
-  current = yellow reverse
-  local = yellow
-  untracked = cyan
-[core]
-	excludesfile = ~/.gitignore
-	editor = vim
-[help]
-  autocorrect = 1
+  nobranch = blue
 [github]
 	user = rachelober
-	
+[help]
+  autocorrect = 1
 [merge]
 	tool = opendiff
+[pager]
+	color = true
