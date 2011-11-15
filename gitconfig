@@ -32,7 +32,7 @@
 
 [core]
 	excludesfile = ~/.gitignore
-	editor = "mate -w"
+	editor = "mvim"
 
 [github]
 	user = rachelober
