@@ -41,7 +41,8 @@
 [core]
 	excludesfile = ~/.gitignore
 	editor = vim
-
+[help]
+  autocorrect = 1
 [github]
 	user = rachelober
 	
