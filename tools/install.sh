@@ -36,6 +36,9 @@ if [ -e $dotfiles ]
 then
   warning "You already have dotfiles installed, updating from git..."
 	git pull --rebase origin master
+else
+	note "Cloning from github..."
+	git clone $gitrepo $dotfiles
 fi
 
 log "Installing dotfiles..."
