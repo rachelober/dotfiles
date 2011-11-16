@@ -30,7 +30,7 @@ function link() {
   ln -vsf $src $dest
 }
 
-cd $dotfiles
+cd $HOME
 
 if [ -e $dotfiles ]
 then
@@ -40,6 +40,8 @@ else
 	note "Cloning from github..."
 	git clone $gitrepo $dotfiles
 fi
+
+cd $dotfiles
 
 log "Installing dotfiles..."
 for path in .*
