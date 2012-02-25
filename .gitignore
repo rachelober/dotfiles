@@ -8,3 +8,4 @@ public/cache/**/*
 doc/api
 doc/app
 .swp
+Thumbs.db
