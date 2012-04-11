@@ -1,0 +1,9 @@
+color ir_black
+set guicursor+=a:blinkon0
+set guioptions=aigm
+set mousemodel=popup
+set scrolloff=6
+set sidescrolloff=6
+set visualbell
+set errorbells
+set cursorline

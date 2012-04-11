@@ -13,3 +13,7 @@ I'm a Ruby on Rails developer and use vim. These include some helpful shortcuts 
 This doesn't include any dotfiles for shells. Therefore it integrates well with zsh/tcsh/bash. Personally, I use [my own fork of oh-my-zsh](https://github.com/rachelober/oh-my-zsh) and therefore run this command after bootstrapping.
 
     curl https://raw.github.com/rachelober/oh-my-zsh/master/tools/install.sh | sh
+
+## Vim
+
+I got lazy and now mostly use [Janus by carlhuda](https://github.com/carlhuda/janus) with additional tweaks via my .gvimrc.after and .vimrc.after which are now included in my dotfiles. I removed all of my old .vim configurations.

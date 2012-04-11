@@ -20,7 +20,9 @@
   interactive = true
 [color "branch"]
   current = yellow reverse
-  local = yellow
+  local = green
+  remote = red
+  plain = white
   untracked = cyan
 [color "diff"]
   meta = blue
@@ -28,10 +30,11 @@
   old = red
   new = green
   renames = copy
+  whitespace = blue reverse
 [color "status"]
-  added = green
-  updated = yellow
-  changed = yellow reverse
+  added = yellow
+  updated = green
+  changed = red
   untracked = cyan
   nobranch = blue
 [github]
