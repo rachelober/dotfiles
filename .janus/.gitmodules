@@ -1,0 +1,3 @@
+[submodule "instant-markdown.vim"]
+	path = instant-markdown.vim
+	url = https://github.com/vim-scripts/instant-markdown.vim
