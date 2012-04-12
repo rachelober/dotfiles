@@ -1,0 +1,3 @@
+[submodule ".janus/instant-markdown.vim"]
+	path = .janus/instant-markdown.vim
+	url = https://github.com/vim-scripts/instant-markdown.vim.git
