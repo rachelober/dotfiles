@@ -4,3 +4,6 @@
 [submodule ".janus/html5-syntax"]
 	path = .janus/html5-syntax
 	url = https://github.com/othree/html5-syntax.vim
+[submodule ".janus/instant-markdown"]
+	path = .janus/instant-markdown
+	url = https://github.com/suan/vim-instant-markdown.git
