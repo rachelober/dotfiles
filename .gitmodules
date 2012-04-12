@@ -1,3 +1,12 @@
 [submodule ".janus/instant-markdown.vim"]
 	path = .janus/instant-markdown.vim
 	url = https://github.com/vim-scripts/instant-markdown.vim.git
+[submodule ".janus/rename2"]
+	path = .janus/rename2
+	url = https://github.com/vim-scripts/Rename2.git
+[submodule ".janus/html5.vim"]
+	path = .janus/html5.vim
+	url = https://github.com/othree/html5.vim.git
+[submodule ".janus/html5-syntax"]
+	path = .janus/html5-syntax
+	url = https://github.com/othree/html5-syntax.vim.git
