@@ -7,3 +7,8 @@ set sidescrolloff=6
 set visualbell
 set errorbells
 set cursorline
+
+" Following three lines remove the auto copy function from VIM
+set guioptions-=a
+set guioptions-=A
+set guioptions-=aA
