@@ -1,11 +1,83 @@
+# Rails
+*.rbc
+*.sassc
+.sass-cache
+capybara-*.html
+.rspec
+/.bundle
+/vendor/bundle
+/log/*
+/tmp/*
+/db/*.sqlite3
+/public/system/*
+/coverage/
+/spec/tmp/*
+**.orig
+rerun.txt
+pickle-email-*.html
+/config/database.yml
+
+# Ruby
+*.gem
+*.rbc
+.bundle
+.config
+coverage
+InstalledFiles
+lib/bundler/man
+pkg
+rdoc
+spec/reports
+test/tmp
+test/version_tmp
+tmp
+
+# YARD artifacts
+.yardoc
+_yardoc
+doc/
+
+# Wordpress
+.htaccess
+wp-*.php
+xmlrpc.php
+wp-admin/
+wp-includes/
+wp-content/uploads/
+wp-content/blogs.dir/
+wp-content/upgrade/*
+wp-content/backup-db/*
+wp-content/advanced-cache.php
+wp-content/wp-cache-config.php
+wp-content/cache/*
+wp-content/cache/supercache/*
+sitemap.xml
+sitemap.xml.gz
+readme.html
+license.txt
+
+# Espresso
+*.esproj
+
+# OSX
 .DS_Store
-.svn
-*~
+._*
+.Spotlight-V100
+.Trashes
+
+# SASS
+.sass-cache
+
+# SublimeText
+/*.sublime-project
+*.sublime-workspace
+
+# TextMate
 *.tmproj
-log/*.log
-tmp/**/*
-public/cache/**/*
-doc/api
-doc/app
-.swp
-Thumbs.db
+*.tmproject
+tmtags
+
+# Vim
+.*.sw[a-z]
+*.un~
+Session.vim
