@@ -33,4 +33,6 @@ export PATH=~/bin:~/www/bin:$PATH:/usr/local/mysql/bin:/usr/sbin:/usr/bin
 export MANPATH=/usr/local/man:/usr/local/mysql/man:/user/local/git/man:$MANPATH
 
 # RVM
-[[ -s '/Users/rober/.rvm/scripts/rvm' ]] && source '/Users/rober/.rvm/scripts/rvm'
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting

@@ -1,6 +1,6 @@
 [user]
 	name = Rachel Ober
-	email = rachelober@gmail.com
+	email = github@rachelober.com
 [core]
 	excludesfile = ~/.gitignore
 	editor = vim

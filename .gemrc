@@ -1,9 +1,11 @@
---- 
-:benchmark: false
-:update_sources: true
+---
 :backtrace: false
+:benchmark: false
 :bulk_threshold: 1000
+:sources:
+- http://rubygems.org/
+- http://gems.paperlesspost.com
+- http://gems.paperlesspost.com
+:update_sources: true
 :verbose: true
 gem: --no-ri --no-rdoc
-:sources: 
-- http://rubygems.org/
