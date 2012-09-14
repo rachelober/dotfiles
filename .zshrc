@@ -29,7 +29,8 @@ plugins=(cap gem git github macports osx postgres-macports rails rails3 ruby tex
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-export PATH=~/bin:~/www/bin:$PATH:/usr/local/mysql/bin:/usr/sbin:/usr/bin
+export NODE_PATH=/usr/local/lib/node
+export PATH=~/bin:~/www/bin:$NODE_PATH:$PATH:/usr/local/mysql/bin:/usr/sbin:/usr/bin
 export MANPATH=/usr/local/man:/usr/local/mysql/man:/user/local/git/man:$MANPATH
 
 # RVM
