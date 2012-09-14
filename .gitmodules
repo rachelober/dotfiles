@@ -7,3 +7,6 @@
 [submodule ".janus/instant-markdown"]
 	path = .janus/instant-markdown
 	url = https://github.com/suan/vim-instant-markdown.git
+[submodule ".janus/gundo.vim"]
+	path = .janus/gundo.vim
+	url = https://github.com/sjl/gundo.vim.git
