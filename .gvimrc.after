@@ -4,6 +4,10 @@ set t_Co=16
 set background=dark
 colorscheme solarized
 
+if has('gui_running')
+  set guifont=Source\ Code\ Pro:h12
+endif
+
 set guicursor+=a:blinkon0
 set guioptions=aigm
 set mousemodel=popup
