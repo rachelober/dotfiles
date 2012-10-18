@@ -1,22 +1,22 @@
 [user]
-	name = Rachel Ober
-	email = rachelober@gmail.com
+  name = Rachel Ober
+  email = rachelober@gmail.com
 [core]
-	excludesfile = ~/.gitignore
-	editor = vim
+  excludesfile = ~/.gitignore
+  editor = vim
 [alias]
-	ci = commit -a -v
-	co = checkout
-	st = status -a
-	praise = blame
-	br = branch
-	df = diff
-	lg = log -p
-	rb = rebase
+  ci = commit -a -v
+  co = checkout
+  st = status -a
+  praise = blame
+  br = branch
+  df = diff
+  lg = log -p
+  rb = rebase
 [apply]
-	whitespace = strip
+  whitespace = strip
 [color]
-	ui = true
+  ui = true
   interactive = true
 [color "branch"]
   current = yellow reverse
@@ -38,10 +38,10 @@
   untracked = cyan
   nobranch = blue
 [github]
-	user = rachelober
+  user = rachelober
 [help]
   autocorrect = 1
 [merge]
-	tool = opendiff
+  tool = opendiff
 [pager]
-	color = true
+  color = true
