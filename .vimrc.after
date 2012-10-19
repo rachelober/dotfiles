@@ -33,6 +33,7 @@ set autoindent              " carry over indenting from previous line
 set backspace=2             " allow backspace beyond insertion point
 set cindent                 " automatic program indenting
 set cinkeys-=0#             " comments don't fiddle with indenting
+set colorcolumn=80          " color column 80
 set commentstring=\ \ #%s   " when folds are created, add them to this
 set copyindent              " make autoindent use the same chars as prev line
 set directory-=.            " don't store temp files in cwd
