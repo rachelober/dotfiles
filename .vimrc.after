@@ -13,6 +13,12 @@ set softtabstop=2
 set textwidth=72
 set expandtab
 
+" Don't let me use the arrow keys
+noremap <Up> <NOP>
+noremap <Down> <NOP>
+noremap <Left> <NOP>
+noremap <Right> <NOP>
+
 " Allow backspacing over everything in insert mode
 set backspace=indent,eol,start
 
