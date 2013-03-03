@@ -26,13 +26,15 @@ let guifontpp_original_font_map="<M-=>"
 
 " MacVim shift+arrow-keys behavior (required in .vimrc)
 if has("gui_macvim")
-  let macvim_hig_shift_movement = 1
+  let macvim_hig_shift_movement=1
+  let NERDTreeShowHidden=1
 endif
 
 set autoindent              " carry over indenting from previous line
 set backspace=2             " allow backspace beyond insertion point
 set cindent                 " automatic program indenting
 set cinkeys-=0#             " comments don't fiddle with indenting
+set clipboard=unnamed       " all operations work with the OS
 set colorcolumn=80          " color column 80
 set commentstring=\ \ #%s   " when folds are created, add them to this
 set copyindent              " make autoindent use the same chars as prev line
