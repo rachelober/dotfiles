@@ -89,3 +89,6 @@ highlight SpellErrors guifg=lightred guibg=bg gui=underline cterm=underline term
 " nice-looking hilight if I remember to set my terminal colors
 highlight clear Search
 highlight Search term=NONE cterm=NONE ctermfg=white ctermbg=black
+
+" style my git commit
+autocmd Filetype gitcommit setlocal spell textwidth=72
