@@ -98,3 +98,8 @@ autocmd Filetype gitcommit setlocal spell textwidth=72
 " set up relative line numbering
 autocmd InsertEnter * :set number
 autocmd InsertLeave * :set relativenumber
+
+" Following three lines remove the auto copy function from VIM
+set guioptions-=a
+set guioptions-=A
+set guioptions-=aA
