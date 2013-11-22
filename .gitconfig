@@ -45,3 +45,5 @@
   tool = opendiff
 [pager]
   color = true
+[push]
+  default = simple
