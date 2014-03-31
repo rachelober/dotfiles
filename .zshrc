@@ -33,4 +33,7 @@ export NODE_PATH=/usr/local/lib/node
 export PATH=~/bin:~/www/bin:/usr/local/bin:$NODE_PATH:$PATH:/usr/local/sbin:/usr/local/mysql/bin:/usr/sbin:/usr/bin
 export MANPATH=/usr/local/man:/usr/local/mysql/man:/user/local/git/man:$MANPATH
 export EDITOR=mvim
-eval "$(rbenv init -)"
+
+# RVM
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
