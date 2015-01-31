@@ -53,20 +53,12 @@ plugins=(brew bundler capistrano cloudapp cp gem git github heroku osx pow rails
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
-
-
 export NODE_PATH=/usr/local/lib/node
-export PATH=$HOME/bin:/usr/local/bin:$NODE_PATH:$PATH:/usr/local/sbin:/usr/local/mysql/bin:/usr/sbin:/usr/bin
+export PATH=$HOME/.bin:$HOME/bin:/usr/local/bin:$NODE_PATH:$PATH:/usr/local/sbin:/usr/local/mysql/bin:/usr/sbin:/usr/bin
 export MANPATH=/usr/local/man:/usr/local/mysql/man:/user/local/git/man:$MANPATH
 export EDITOR=mvim
 
-# rvm
-
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-
 # rbenv
-
 export RBENV_ROOT="/usr/local/var/rbenv"
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
