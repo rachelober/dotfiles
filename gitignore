@@ -56,26 +56,18 @@ sitemap.xml.gz
 readme.html
 license.txt
 
-# Espresso
-*.esproj
-
 # OSX
 .DS_Store
 ._*
 .Spotlight-V100
 .Trashes
 
-# SASS
+# Sass
 .sass-cache
 
 # SublimeText
 /*.sublime-project
 *.sublime-workspace
-
-# TextMate
-*.tmproj
-*.tmproject
-tmtags
 
 # Vim
 .*.sw[a-z]
