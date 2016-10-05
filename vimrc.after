@@ -47,6 +47,7 @@ let guifontpp_original_font_map="<M-=>"
 if has("gui_macvim")
   let macvim_hig_shift_movement=1
   let NERDTreeShowHidden=1
+  let NERDTreeIgnore = ['\.DS_Store$']
 endif
 
 set autoindent              " carry over indenting from previous line
