@@ -5,7 +5,7 @@ export ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="rachel"
+ZSH_THEME="../../.dotfiles/rachel"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -150,3 +150,6 @@ alias pgstatus='pg_ctl -D /usr/local/var/postgres status'
 # This way you tell zsh comp to take the first part of the path to be exact, and to avoid partial globs.
 # http://lethalman.blogspot.com/2009/10/speeding-up-zsh-completion.html
 zstyle ':completion:*' accept-exact '*(N)'
+
+# recommended by brew doctor
+export PATH="/usr/local/bin:$PATH"
