@@ -104,10 +104,12 @@ alias log_cleanup='sudo rm -rf /private/var/log/asl/*'
 alias show_hidden='defaults write com.apple.Finder AppleShowAllFiles YES && killall Finder && open /System/Library/CoreServices/Finder.app'
 alias hide_hidden='defaults write com.apple.Finder AppleShowAllFiles NO && killall Finder && open /System/Library/CoreServices/Finder.app'
 
-# ls
+# Unix
 alias l='ls -lAh'
-alias ll='ls -l'
 alias la='ls -A'
+alias ll='ls -l'
+alias ln="ln -v"
+alias mkdir="mkdir -p"
 
 # interactive/verbose commands
 alias df='df -h'
@@ -135,6 +137,9 @@ alias gscrub='git branch --merged | grep -v master | xargs git branch -d'
 # OSX doesn't have wget
 alias wget='curl -O'
 
+# Pretty print the path
+alias path='echo $PATH | tr -s ":" "\n"'
+
 # Postgres for Mac OS X
 if [ -x /usr/local/pgsql ]; then
   export PATH=/usr/local/pgsql/bin:$PATH
@@ -153,3 +158,6 @@ zstyle ':completion:*' accept-exact '*(N)'
 
 # recommended by brew doctor
 export PATH="/usr/local/bin:$PATH"
+
+# If there is a local zshrc, load it at the end
+[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
