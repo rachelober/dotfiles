@@ -1,5 +1,7 @@
 # Rachel's dotfiles
 
+[![BCH compliance](https://bettercodehub.com/edge/badge/rachelober/dotfiles)](https://bettercodehub.com/)
+
 ## About
 
 * Use thoughtbot's laptop
