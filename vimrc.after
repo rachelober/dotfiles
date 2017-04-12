@@ -9,13 +9,19 @@ set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
-" SCSS-lint
-let g:syntastic_scss_checkers = ['scss_lint']
-
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+
+let g:syntastic_sh_checkers = ['shellcheck']
+let g:syntastic_scss_checkers = ['scss_lint']
+
+let g:syntastic_mode_map = {
+        \ "mode": "active",
+        \ "active_filetypes": ["haml", "html", "json", "markdown", "ruby", "sass", "scss", "sh", "text", "viml", "yaml", "zsh"],
+        \ "passive_filetypes": [] }
+let g:syntastic_extra_filetypes = [ "make", "gitcommit" ]
 
 " Whitespace
 set wrap
@@ -50,6 +56,10 @@ if has("gui_macvim")
   let NERDTreeIgnore = ['\.DS_Store$']
 endif
 
+" When the type of shell script is /bin/sh, assume a POSIX-compatible
+" shell for syntax highlighting purposes.
+let g:is_posix = 1
+
 set autoindent              " carry over indenting from previous line
 set backspace=2             " allow backspace beyond insertion point
 set cindent                 " automatic program indenting
@@ -61,7 +71,7 @@ set copyindent              " make autoindent use the same chars as prev line
 set directory-=.            " don't store temp files in cwd
 set encoding=utf8           " UTF-8 by default
 set expandtab               " no tabs
-set foldmethod=marker       " use braces by default
+set foldmethod=marker
 set formatoptions=tcqn1     " t - autowrap normal text
                             " c - autowrap comments
                             " q - gq formats comments
@@ -72,6 +82,7 @@ set hlsearch                " hilight searching
 set ignorecase              " case insensitive
 set incsearch               " search as you type
 set infercase               " completion recognizes capitalization
+set laststatus=2            " Always display the status line
 set linebreak               " break long lines by word, not char
 set listchars+=tab:\|\      " make tabs show up in 'list' mode
 set matchtime=2             " tenths of second to hilight matching paren
@@ -79,7 +90,10 @@ set modelines=5             " how many lines of head & tail to look for ml's
 set nobackup                " no backups left after done editing
 set novisualbell            " no flashing
 set number                  " turn on line numbers
+set nobackup
 set nowritebackup           " no backups made while editing
+set noswapfile              " http://robots.thoughtbot.com/post/18739402579/global-gitignore#comment-458413287
+set autowrite               " Automatically :write before running commands
 set printoptions=paper:letter " US paper
 set rnu                     " set relative line numbering
 set nonumber
@@ -94,6 +108,7 @@ set sidescrolloff=3         " keep cursor away from this many chars left/right
 set smartcase               " lets you search for ALL CAPS
 set softtabstop=2           " spaces 'feel' like tabs
 set tabstop=2               " the One True Tab
+set nojoinspaces
 set notitle                 " don't set the title of the Vim window
 set wildmenu                " show possible completions on command line
 set wildmode=list:longest,full " list all options and complete

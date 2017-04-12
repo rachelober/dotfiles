@@ -1,1 +1,1 @@
-/Users/rober/.dotfiles/janus/editorconfig-vim/plugin/editorconfig-core-py/MANIFEST.in
+include README.rst LICENSE.txt

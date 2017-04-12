@@ -73,3 +73,9 @@ license.txt
 .*.sw[a-z]
 *.un~
 Session.vim
+
+# Local files
+.zsh.local
+zsh.local
+
+# tags
