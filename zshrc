@@ -12,7 +12,7 @@ ZSH_THEME="../../.dotfiles/rachel"
 
 # Uncomment the following line to use hyphen-insensitive completion. Case
 # sensitive completion must be off. _ and - will be interchangeable.
- HYPHEN_INSENSITIVE="true"
+HYPHEN_INSENSITIVE="true"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
 # DISABLE_AUTO_UPDATE="true"
@@ -30,7 +30,7 @@ ZSH_THEME="../../.dotfiles/rachel"
 # ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
- COMPLETION_WAITING_DOTS="true"
+COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
@@ -80,13 +80,14 @@ export SSH_KEY_PATH="~/.ssh/id_rsa"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # User configuration
-export NODE_PATH=/usr/local/lib/node
-export PATH=$HOME/.bin:$HOME/bin:/usr/local/bin:$NODE_PATH:$PATH:/usr/local/sbin:/usr/local/mysql/bin:/usr/sbin:/usr/bin
+export NODE_PATH="/usr/local/lib/node"
+export PATH="$HOME/.bin:$HOME/bin:/usr/local/bin:$NODE_PATH:$HOME/.rbenv/bin:$PATH:/usr/local/sbin:/usr/local/mysql/bin:/usr/sbin:/usr/bin"
 export MANPATH=/usr/local/man:/usr/local/mysql/man:/user/local/git/man:$MANPATH
+# Pretty print the path
+alias path='echo $PATH | tr -s ":" "\n"'
 
 # rbenv
 export RBENV_ROOT="/usr/local/var/rbenv"
-export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 
 # Added by the Heroku Toolbelt
@@ -103,6 +104,9 @@ alias wtf='whoami | ps u'
 alias log_cleanup='sudo rm -rf /private/var/log/asl/*'
 alias show_hidden='defaults write com.apple.Finder AppleShowAllFiles YES && killall Finder && open /System/Library/CoreServices/Finder.app'
 alias hide_hidden='defaults write com.apple.Finder AppleShowAllFiles NO && killall Finder && open /System/Library/CoreServices/Finder.app'
+
+# Search history
+alias hgrep='history | grep --color'
 
 # Unix
 alias l='ls -lAh'
@@ -124,6 +128,7 @@ alias gbd='git branch -d'
 alias gcob='gcb'
 alias grm='git status | grep deleted | awk "{print \$3}" | xargs git rm'
 alias gs='gss'
+alias gscrub='git branch --merged | grep -v master | xargs git branch -d'
 
 # Speed up git tab-completions
 # http://talkings.org/post/5236392664/zsh-and-slow-git-completion
@@ -131,33 +136,13 @@ __git_files () {
     _wanted files expl 'local files' _files
 }
 
-# Clean up merged branches
-alias gscrub='git branch --merged | grep -v master | xargs git branch -d'
-
 # OSX doesn't have wget
 alias wget='curl -O'
-
-# Pretty print the path
-alias path='echo $PATH | tr -s ":" "\n"'
-
-# Postgres for Mac OS X
-if [ -x /usr/local/pgsql ]; then
-  export PATH=/usr/local/pgsql/bin:$PATH
-fi
-
-# commands to control local postgres installation
-# paths are for osx installation via macports
-alias pgstart='pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start'
-alias pgstop='pg_ctl -D /usr/local/var/postgres stop -s -m fast'
-alias pgrestart='pg_ctl -D /usr/local/var/postgres restart'
-alias pgstatus='pg_ctl -D /usr/local/var/postgres status'
 
 # This way you tell zsh comp to take the first part of the path to be exact, and to avoid partial globs.
 # http://lethalman.blogspot.com/2009/10/speeding-up-zsh-completion.html
 zstyle ':completion:*' accept-exact '*(N)'
 
-# recommended by brew doctor
-export PATH="/usr/local/bin:$PATH"
-
 # If there is a local zshrc, load it at the end
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
+export PATH="/usr/local/opt/postgresql@9.5/bin:$PATH"

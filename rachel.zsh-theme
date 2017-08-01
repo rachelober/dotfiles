@@ -12,17 +12,13 @@ ZSH_THEME_GIT_PROMPT_DELETED="%{$fg[red]%} ✖"
 ZSH_THEME_GIT_PROMPT_RENAMED="%{$fg[magenta]%} ➜"
 ZSH_THEME_GIT_PROMPT_UNMERGED="%{$fg[yellow]%} ═"
 ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[cyan]%} ✭"
+ZSH_THEME_GIT_PROMPT_STATUS=
 
-# Parsing git dirty status slows down my prompt tremendously without adding much value.
-# This variant of git_prompt_info just grabs the branch.
-function git_current_branch() {
-  ref=$(git symbolic-ref HEAD 2> /dev/null) || return
-  echo "$ZSH_THEME_GIT_PROMPT_PREFIX${ref#refs/heads/}$ZSH_THEME_GIT_PROMPT_SUFFIX"
-}
-
-# Prompt coloring
+# Right prompt template
 # RPROMPT='${return_status}$(git_prompt_status)%{$reset_color%}'
-PROMPT='[%{${fg_bold[red]}%}%*%{$reset_color%}][%{${fg_bold[magenta]}%}%~%{$reset_color%}][%{${fg_bold[green]}%}%n@%m%{$reset_color%}]$(git_current_branch) ${return_status}$(git_prompt_status)%{$reset_color%}
+
+# Left prompt template
+PROMPT='[%{${fg_bold[red]}%}%*%{$reset_color%}][%{${fg_bold[magenta]}%}%~%{$reset_color%}][%{${fg_bold[green]}%}%n@%m%{$reset_color%}]$ZSH_THEME_GIT_PROMPT_PREFIX$(git_current_branch)$ZSH_THEME_GIT_PROMPT_SUFFIX ${return_status}$(git_prompt_status)%{$reset_color%}
 %{${fg_bold[$CARETCOLOR]}%}%%%{${reset_color}%} '
 
 # Colors for Directory Listing
