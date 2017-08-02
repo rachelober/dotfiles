@@ -5,7 +5,7 @@ export ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="../../.dotfiles/rachel"
+ZSH_THEME="../../.dotfiles/zsh/rachel"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -104,6 +104,7 @@ alias wtf='whoami | ps u'
 alias log_cleanup='sudo rm -rf /private/var/log/asl/*'
 alias show_hidden='defaults write com.apple.Finder AppleShowAllFiles YES && killall Finder && open /System/Library/CoreServices/Finder.app'
 alias hide_hidden='defaults write com.apple.Finder AppleShowAllFiles NO && killall Finder && open /System/Library/CoreServices/Finder.app'
+alias hdbusy='sudo lsof +D "/Volumes/My Passport"'
 
 # Search history
 alias hgrep='history | grep --color'
