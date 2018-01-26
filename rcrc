@@ -1,1 +1,3 @@
+DOTFILES_DIRS="/Users/rober/Development/dotfiles"
 EXCLUDES="README.md LICENSE"
+HOSTNAME="rober-mbp"

@@ -130,6 +130,8 @@ alias gcob='gcb'
 alias grm='git status | grep deleted | awk "{print \$3}" | xargs git rm'
 alias gs='gss'
 alias gscrub='git branch --merged | grep -v master | xargs git branch -d'
+alias gpfoh='git pf origin HEAD'
+alias gcf='git commit --fixup'
 
 # Speed up git tab-completions
 # http://talkings.org/post/5236392664/zsh-and-slow-git-completion
@@ -147,3 +149,11 @@ zstyle ':completion:*' accept-exact '*(N)'
 # If there is a local zshrc, load it at the end
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
 export PATH="/usr/local/opt/postgresql@9.5/bin:$PATH"
+
+# recommended by brew doctor
+export PATH="/usr/local/bin:$PATH"
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
