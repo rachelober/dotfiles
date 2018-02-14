@@ -1,6 +1,4 @@
 " colorscheme
-let g:solarized_termcolors=256
-set t_Co=16
 set background=dark
 colorscheme solarized
 
