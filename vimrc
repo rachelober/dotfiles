@@ -273,6 +273,10 @@ autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 " toggle NERDTree on/off
 nnoremap <F6> :NERDTreeToggle<CR>
 
+" change the NERDTree root dir
+set autochdir
+let NERDTreeChDirMode=2
+
 " add git status to beginning of file name in tree
 let g:NERDTreeIndicatorMapCustom = {
   \ "Modified"  : "✹",
