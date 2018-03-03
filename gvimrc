@@ -1,10 +1,12 @@
-" colorscheme
-set background=dark
-colorscheme solarized
+" vim: foldmethod=marker foldlevel=0 cc=34
 
+" set my font
 if has('gui_running')
   set guifont=Source\ Code\ Pro:h12
 endif
+
+" Gutter color default is annoying. Make it blend in.
+highlight SignColumn guibg=NONE
 
 set guicursor+=a:blinkon0
 set guioptions=aigm
@@ -15,32 +17,3 @@ set visualbell
 set errorbells
 set cursorline
 
-" Syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-" SCSS-lint
-let g:syntastic_scss_checkers = ['scss_lint']
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-
-let g:syntastic_sh_checkers = ['shellcheck']
-let g:syntastic_scss_checkers = ['scss_lint']
-
-" Following three lines remove the auto copy function from VIM
-set guioptions-=a
-set guioptions-=A
-set guioptions-=aA
-
-" No audible bell
-set vb
-
-" No toolbar
-set guioptions-=T
-
-" Use console dialogs
-set guioptions+=c

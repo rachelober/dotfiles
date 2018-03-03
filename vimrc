@@ -1,10 +1,31 @@
+" vim: foldmethod=marker foldlevel=0 cc=34
+
+" pathogen {{{
+
+call pathogen#infect()
+
+" }}}
+
+" lightline {{{
+
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'fugitive#head'
+      \ },
+      \ }
+
+" }}}
+
 " colors {{{
 
-let g:solarized_termcolors=256
-set t_Co=256
+syntax enable
 set background=dark
 colorscheme solarized
-syntax enable
 
 " }}}
 
@@ -15,6 +36,7 @@ set colorcolumn=80                " color column 80
 set cursorline                    " highlight current line
 set guioptions=aAce               " remove the toolbar in MacVim
 set lazyredraw                    " redraw only when we need to
+set noshowmode                    " don't show vim mode
 set notitle                       " don't set the title of the Vim window
 set novisualbell                  " no flashing
 set number                        " show line numbers
@@ -44,7 +66,7 @@ set guioptions-=a
 set guioptions-=A
 set guioptions-=aA
 
-" resize panes when window/terminal gets resize
+" resize panes when window/terminal gets resized
 autocmd VimResized * :wincmd =
 
 " }}}
@@ -56,13 +78,6 @@ set ignorecase                    " case insensitive
 set incsearch                     " search as characters are entered
 set infercase                     " completion recognizes capitalization
 set smartcase                     " lets you search for ALL CAPS
-
-" custom incorrect spelling colors
-highlight SpellErrors guifg=lightred guibg=bg gui=underline cterm=underline term=underline
-
-" nice-looking hilight if I remember to set my terminal colors
-highlight clear Search
-highlight Search term=NONE cterm=NONE ctermfg=white ctermbg=black
 
 " turn off search highlight
 nnoremap <F5> :noh<CR>
@@ -133,13 +148,23 @@ nnoremap <leader>s :mksession<CR>
 " open ag.vim
 nnoremap <leader>a :Ag
 
-" }}}
+" save my poor shift key
+nmap ; :
 
-" on launch {{{
+" having Ex mode start or showing me the command history
+" is a complete pain in the ass if i mistype
+map Q <silent>
+map q: <silent>
+map K <silent>
+map q <silent>
 
-runtime bundle/vim-pathogen/autoload/pathogen.vim
-call pathogen#infect()
-call pathogen#helptags()
+" i always, ALWAYS hit ":W" instead of ":w"
+command! Q q
+command! W w
+
+" undo redo undo
+nmap <D-z> u
+nmap <D-r> <C-R>
 
 " }}}
 
@@ -197,7 +222,7 @@ endfunction
 set autoindent                    " carry over indenting from previous line
 set autoread                      " auto read when a file is changed from the outside
 set autowrite                     " Automatically :write before running commands
-set backspace=indent,eol,startset " allow backspace beyond insertion point
+set backspace=indent,eol,start    " allow backspace beyond insertion point
 set cindent                       " automatic program indenting
 set cinkeys-=0#                   " comments don't fiddle with indenting
 set clipboard=unnamed             " all operations work with the OS
@@ -242,17 +267,15 @@ set wrapmargin=2
 
 " }}}
 
-" guifont++.vim
-let guifontpp_smaller_font_map="<M-->"
-let guifontpp_larger_font_map="<M-+>"
-let guifontpp_original_font_map="<M-=>"
+" guifont++.vim {{{
+" https://github.com/vim-scripts/guifontpp.vim/blob/master/plugin/guifont%2B%2B.vim
 
+let guifontpp_size_increment=2
+let guifontpp_smaller_font_map="<D-->"
+let guifontpp_larger_font_map="<D-=>"
+let guifontpp_original_font_map="<D-0>"
 
-" When the type of shell script is /bin/sh, assume a POSIX-compatible
-" shell for syntax highlighting purposes.
-" let g:is_posix = 1
-" 
-
+" }}}
 
 " git {{{
 
@@ -260,9 +283,6 @@ let guifontpp_original_font_map="<M-=>"
 autocmd Filetype gitcommit setlocal spell textwidth=64
 
 " }}}
-
-
-" Plugins
 
 " NERDtree {{{
 
@@ -291,8 +311,14 @@ let g:NERDTreeIndicatorMapCustom = {
   \ "Unknown"   : "?"
   \ }
 
+" enable line numbers
+let NERDTreeShowLineNumbers=1
+
+" make sure relative line numbers are used
+autocmd FileType nerdtree setlocal relativenumber
+
 " }}}
-  
+
 " Syntastic {{{
 
 set statusline+=%#warningmsg#
@@ -325,21 +351,147 @@ let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 
 " }}}
 
+" GitGutter {{{
+
 " GitGutter styling to use · instead of +/-
 let g:gitgutter_sign_added = '∙'
 let g:gitgutter_sign_modified = '∙'
 let g:gitgutter_sign_removed = '∙'
 let g:gitgutter_sign_modified_removed = '∙'
 
+" }}}
+
 " MacVim {{{
 
-" MacVim shift+arrow-keys behavior (required in .vimrc)
-if has("gui_macvim")
+if has("gui_macvim") && has("gui_running")
+  " MacVim shift+arrow-keys behavior (required in .vimrc)
   let macvim_hig_shift_movement=1
   let NERDTreeShowHidden=1
   let NERDTreeIgnore = ['\.DS_Store$']
+
+  " Map command-[ and command-] to indenting or outdenting
+  " while keeping the original selection in visual mode
+  vmap <D-]> >gv
+  vmap <D-[> <gv
+
+  nmap <D-]> >>
+  nmap <D-[> <<
+
+  omap <D-]> >>
+  omap <D-[> <<
+
+  imap <D-]> <Esc>>>i
+  imap <D-[> <Esc><<i
+
+  " Bubble single lines
+  nmap <D-Up> [e
+  nmap <D-Down> ]e
+  nmap <D-k> [e
+  nmap <D-j> ]e
+
+  " Bubble multiple lines
+  vmap <D-Up> [egv
+  vmap <D-Down> ]egv
+  vmap <D-k> [egv
+  vmap <D-j> ]egv
+
+  " Map Command-# to switch tabs
+  map  <D-0> 0gt
+  imap <D-0> <Esc>0gt
+  map  <D-1> 1gt
+  imap <D-1> <Esc>1gt
+  map  <D-2> 2gt
+  imap <D-2> <Esc>2gt
+  map  <D-3> 3gt
+  imap <D-3> <Esc>3gt
+  map  <D-4> 4gt
+  imap <D-4> <Esc>4gt
+  map  <D-5> 5gt
+  imap <D-5> <Esc>5gt
+  map  <D-6> 6gt
+  imap <D-6> <Esc>6gt
+  map  <D-7> 7gt
+  imap <D-7> <Esc>7gt
+  map  <D-8> 8gt
+  imap <D-8> <Esc>8gt
+  map  <D-9> 9gt
+  imap <D-9> <Esc>9gt
+else
+  " Map command-[ and command-] to indenting or outdenting
+  " while keeping the original selection in visual mode
+  vmap <A-]> >gv
+  vmap <A-[> <gv
+
+  nmap <A-]> >>
+  nmap <A-[> <<
+
+  omap <A-]> >>
+  omap <A-[> <<
+
+  imap <A-]> <Esc>>>i
+  imap <A-[> <Esc><<i
+
+  " Bubble single lines
+  nmap <C-Up> [e
+  nmap <C-Down> ]e
+  nmap <C-k> [e
+  nmap <C-j> ]e
+
+  " Bubble multiple lines
+  vmap <C-Up> [egv
+  vmap <C-Down> ]egv
+  vmap <C-k> [egv
+  vmap <C-j> ]egv
+
+  " Make shift-insert work like in Xterm
+  map <S-Insert> <MiddleMouse>
+  map! <S-Insert> <MiddleMouse>
+
+  " Map Control-# to switch tabs
+  map  <C-0> 0gt
+  imap <C-0> <Esc>0gt
+  map  <C-1> 1gt
+  imap <C-1> <Esc>1gt
+  map  <C-2> 2gt
+  imap <C-2> <Esc>2gt
+  map  <C-3> 3gt
+  imap <C-3> <Esc>3gt
+  map  <C-4> 4gt
+  imap <C-4> <Esc>4gt
+  map  <C-5> 5gt
+  imap <C-5> <Esc>5gt
+  map  <C-6> 6gt
+  imap <C-6> <Esc>6gt
+  map  <C-7> 7gt
+  imap <C-7> <Esc>7gt
+  map  <C-8> 8gt
+  imap <C-8> <Esc>8gt
+  map  <C-9> 9gt
+  imap <C-9> <Esc>9gt
 endif
 
 " }}}
 
-" vim:foldmethod=marker:foldlevel=0:cc=34
+" NERD Commenter {{{
+
+map <D-/> <leader>c<space>
+
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+
+" Use compact syntax for prettified multi-line comments
+let g:NERDCompactSexyComs = 1
+
+" Align line-wise comment delimiters flush left instead of following code indentation
+let g:NERDDefaultAlign = 'left'
+
+" Add your own custom formats or override the defaults
+let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
+
+" Allow commenting and inverting empty lines (useful when commenting a region)
+let g:NERDCommentEmptyLines = 1
+
+" Enable trimming of trailing whitespace when uncommenting
+let g:NERDTrimTrailingWhitespace = 1
+
+" }}}
