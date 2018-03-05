@@ -5,6 +5,7 @@ if has('gui_running')
   set guifont=Source\ Code\ Pro:h12
 endif
 
+<<<<<<< HEAD
 " Gutter color default is annoying. Make it blend in.
 highlight SignColumn guibg=NONE
 
@@ -17,3 +18,12 @@ set visualbell
 set errorbells
 set cursorline
 
+=======
+
+
+" No toolbar
+set guioptions-=T
+
+" Use console dialogs
+set guioptions+=c
+>>>>>>> --wip-- [skip ci]
