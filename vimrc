@@ -530,8 +530,14 @@ let NERDTreeShowLineNumbers=1
 
 " open NERDTree automatically when vim starts up
 autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+autocmd VimEnter * call s:CheckToOpenNERDTree()
 
+" update NERDTree if it gains focus
+augroup AuNERDTreeCmd
+autocmd AuNERDTreeCmd VimEnter * call s:CdIfDirectory(expand("<amatch>"))
+autocmd AuNERDTreeCmd FocusGained * call s:UpdateNERDTree()
+
+" TODO: add documentation
 let NERDTreeShowHidden=1
 let NERDTreeIgnore = ['\.DS_Store$']
 
@@ -541,11 +547,31 @@ autocmd BufWritePost * NERDTreeFocus | execute 'normal R' | wincmd p
 " make sure relative line numbers are used
 autocmd FileType nerdtree setlocal relativenumber
 
-augroup AuNERDTreeCmd
-autocmd AuNERDTreeCmd VimEnter * call s:CdIfDirectory(expand("<amatch>"))
-autocmd AuNERDTreeCmd FocusGained * call s:UpdateNERDTree()
+" FUNCTION: only opens NERDTree for the correct filetype
+function! s:CheckToOpenNERDTree() abort
+    "dont open a tree for gitcommits
+    if &ft == 'gitcommit'
+        return
+    endif
+    "dont open a tree for .ical files
+    if expand("%:t") =~ '\.ical$'
+        return
+    endif
+    NERDTree
+endfunction
 
-" If the parameter is a directory, cd into it
+" FUNCTION: s:openInNewTab(target)
+function! OpenInNewTab(node)
+  if a:node.path.isDirectory
+    call a:node.activate()
+  else
+    call a:node.activate({'where': 't'})
+    call g:NERDTreeCreator.CreateMirror()
+    wincmd l
+  endif
+endfunction
+
+" FUNCTION: If the parameter is a directory, cd into it
 function s:CdIfDirectory(directory)
   let explicitDirectory = isdirectory(a:directory)
   let directory = explicitDirectory || empty(a:directory)
@@ -571,7 +597,7 @@ function s:CdIfDirectory(directory)
   endif
 endfunction
 
-" NERDTree utility function
+" FUNCTION: NERDTree utility function
 function s:UpdateNERDTree(...)
   let stay = 0
 
