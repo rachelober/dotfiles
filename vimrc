@@ -125,8 +125,9 @@ nnoremap E $
 nnoremap $ <nop>
 nnoremap ^ <nop>
 
-" You don't know what you're missing if you don't use this.
-nnoremap <C-e> :e#<CR>
+" move between the current and alternate buffers without reloading
+" https://stackoverflow.com/questions/133626/how-do-you-return-from-gf-in-vim
+nnoremap <F2> :e#<CR>
 
 " move between open buffers
 nnoremap <C-n> :bnext<CR>
@@ -492,6 +493,10 @@ let g:lightline = {
 
 " NERDCommenter {{{
 
+" toggle comments
+map <D-/> <plug>NERDCommenterToggle<CR>
+imap <D-/> <Esc><plug>NERDCommenterToggle<CR>i
+
 " Add spaces after comment delimiters by default
 let g:NERDSpaceDelims = 1
 
@@ -510,16 +515,19 @@ let g:NERDCommentEmptyLines = 1
 " Enable trimming of trailing whitespace when uncommenting
 let g:NERDTrimTrailingWhitespace = 1
 
-" Toggle comments
-map <D-/> <plug>NERDCommenterToggle<CR>
-imap <D-/> <Esc><plug>NERDCommenterToggle<CR>i
-
 " }}}
 
 " NERDtree {{{
+" https://github.com/scrooloose/nerdtree/blob/master/doc/NERDTree.txt
 
 " toggle NERDTree on/off
 nnoremap <F6> :NERDTreeToggle<CR>
+
+" tells the NERD tree which files to ignore
+let NERDTreeIgnore = ['\.DS_Store$']
+
+" tells the NERD tree to respect |'wildignore'|
+let NERDTreeRespectWildIgnore=1
 
 " change the NERDTree root dir
 set autochdir
@@ -528,94 +536,45 @@ let NERDTreeChDirMode=2
 " enable line numbers
 let NERDTreeShowLineNumbers=1
 
-" open NERDTree automatically when vim starts up
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * call s:CheckToOpenNERDTree()
-
-" update NERDTree if it gains focus
-augroup AuNERDTreeCmd
-autocmd AuNERDTreeCmd VimEnter * call s:CdIfDirectory(expand("<amatch>"))
-autocmd AuNERDTreeCmd FocusGained * call s:UpdateNERDTree()
-
-" TODO: add documentation
-let NERDTreeShowHidden=1
-let NERDTreeIgnore = ['\.DS_Store$']
-
-" refresh NERDTree whenever it gets focus
-autocmd BufWritePost * NERDTreeFocus | execute 'normal R' | wincmd p
-
 " make sure relative line numbers are used
 autocmd FileType nerdtree setlocal relativenumber
 
-" FUNCTION: only opens NERDTree for the correct filetype
-function! s:CheckToOpenNERDTree() abort
-    "dont open a tree for gitcommits
-    if &ft == 'gitcommit'
-        return
-    endif
-    "dont open a tree for .ical files
-    if expand("%:t") =~ '\.ical$'
-        return
-    endif
-    NERDTree
-endfunction
+" change the default arrows
+let g:NERDTreeDirArrowExpandable = '▸'
+let g:NERDTreeDirArrowCollapsible = '▾'
 
-" FUNCTION: s:openInNewTab(target)
-function! OpenInNewTab(node)
-  if a:node.path.isDirectory
-    call a:node.activate()
-  else
-    call a:node.activate({'where': 't'})
-    call g:NERDTreeCreator.CreateMirror()
-    wincmd l
-  endif
-endfunction
+" show hidden files in NERDTree
+let NERDTreeShowHidden=1
 
-" FUNCTION: If the parameter is a directory, cd into it
-function s:CdIfDirectory(directory)
-  let explicitDirectory = isdirectory(a:directory)
-  let directory = explicitDirectory || empty(a:directory)
+" disable “Press ? for help”
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
 
-  if explicitDirectory
-    exe "cd " . fnameescape(a:directory)
-  endif
+" automatically close NerdTree when you open a file
+" let NERDTreeQuitOnOpen = 1
 
-  " Allows reading from stdin
-  " ex: git diff | mvim -R -
-  if strlen(a:directory) == 0
-    return
-  endif
+" automatically delete the buffer of the file you just deleted with NerdTree
+let NERDTreeAutoDeleteBuffer = 1
 
-  if directory
-    NERDTree
-    wincmd p
-    bd
-  endif
+" tells the NERD tree whether to use natural sort order or not when sorting nodes
+let NERDTreeNaturalSort=1
 
-  if explicitDirectory
-    wincmd p
-  endif
-endfunction
+" refresh NERDTree whenever writing to a buffer
+autocmd BufWritePost * NERDTreeFocus | execute 'normal R' | wincmd p
 
-" FUNCTION: NERDTree utility function
-function s:UpdateNERDTree(...)
-  let stay = 0
+" open NERDTree automatically when vim starts up
+autocmd vimenter * NERDTree
 
-  if(exists("a:1"))
-    let stay = a:1
-  end
+" open a NERDTree automatically when vim starts up if no files were specified
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
-  if exists("t:NERDTreeBufName")
-    let nr = bufwinnr(t:NERDTreeBufName)
-    if nr != -1
-      exe nr . "wincmd w"
-      exe substitute(mapcheck("R"), "<CR>", "", "")
-      if !stay
-        wincmd p
-      end
-    endif
-  endif
-endfunction
+" open NERDTree automatically when vim starts up on opening a directory
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
+
+" close vim if the only window left open is a NERDTree
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " }}}
 
