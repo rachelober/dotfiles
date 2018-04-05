@@ -1,11 +1,5 @@
-[user]
-  name = Rachel Ober
-  email = rachelober@users.noreply.github.com
-[core]
-  excludesfile = ~/.gitignore
-  editor = vim
-  ignorecase = false
-  pager = less -XF
+[advice]
+  statusHints = false
 [alias]
   lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
   pf = push --force-with-lease
@@ -13,11 +7,24 @@
   squash = !sh -c 'REV=$(git rev-parse $1) && git commit --squash $@ && git rebase -i --autosquash $REV^' -
   list-merged = !"git branch --merged | grep -v '\\*' | grep -v master | xargs -n 1"
   delete-merged = !"git branch --merged | grep -v '\\*' | grep -v master | xargs -n 1 git branch -d"
+  br = !"git branch | sed 's/^ /_/' | awk '{desc=\"\"; \"git config branch.\"$2\".description\"|getline desc ; print $1\" \"$2\" \"desc}'|sed 's/^_/ /g'"
 [apply]
   whitespace = strip
+[branch]
+	autosetupmerge = always
+	autosetuprebase = always
+[core]
+  excludesfile = ~/.gitignore
+  editor = vim
+  ignorecase = false
+  pager = less -XF
 [color]
-  ui = true
-  interactive = true
+  ui = auto
+	diff = true
+	status = true
+	branch = true
+	interactive = auto
+  grep = auto
 [color "branch"]
   current = yellow reverse
   local = green
@@ -39,18 +46,28 @@
   nobranch = blue
 [commit]
   template = ~/.gitmessage
-[github]
-  user = rachelober
-[help]
-  autocorrect = 1
-[merge]
-  tool = opendiff
-[pager]
-  color = true
-[push]
-  default = simple
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+[github]
+  user = rachelober
+[interactive]
+	singlekey = true
+[help]
+  autocorrect = 10
+[merge]
+  summary = true
+  tool = opendiff
+[pager]
+  color = true
+[pull]
+  rebase = true
+[push]
+  default = tracking
+[rebase]
+	; autosquash = true
+[user]
+  name = Rachel Ober
+  email = rachelober@users.noreply.github.com
