@@ -11,7 +11,7 @@
 [apply]
   whitespace = strip
 [branch]
-	autosetupmerge = always
+	autosetupmerge = true
 	autosetuprebase = always
 [core]
   excludesfile = ~/.gitignore
