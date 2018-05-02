@@ -1,22 +1,34 @@
 " vim: foldmethod=marker foldlevel=1 cc=34
+" Name:     Dotfiles
+" Author:   Rachel Ober
+" URL:      https://github.com/rachelober/dotfiles
+" License:  GNU General Public License v3.0
+" Created:  2009 Sep 23
+" Modified: 2018 Apr 04
 
-" pathogen {{{
+" pathogen
+
+" temporarily disable some plugins
+" let g:pathogen_blacklist = ['NrrwRgn', 'ack.vim', 'ctrlp.vim',  'lightline-ale', 'supertab', 'vim-better-whitespace', 'vim-buffergator', 'vim-bundler', 'vim-closetag', 'vim-css-color', 'vim-dispatch', 'vim-dotenv', 'vim-easymotion', 'vim-flow', 'vim-fugitive', 'vim-gitgutter', 'vim-graphql', 'vim-indent-guides', 'vim-javascript', 'vim-json', 'vim-jsx', 'vim-multiple-cursors', 'vim-rails', 'vim-rhubarb', 'vim-snipmate', 'vim-snippets', 'vim-styled-components', 'vim-styled-jsx', 'vim-surround', 'vim-repeat' ]
+" let g:pathogen_blacklist = [ 'vim-javascript',  'vim-jsx', 'vim-styled-jsx', 'vim-json', 'vim-styled-components' ]
+let g:pathogen_blacklist = [   ]
 
 call pathogen#infect()
 
-" }}}
+"
 
 " colors {{{
 
 syntax enable
 set background=dark
-colorscheme solarized
+silent! colorscheme desert
+silent! colorscheme solarized
 
 " }}}
 
 " ui config {{{
 
-set cmdheight=1                   " height of the command bar
+set cmdheight=3                   " height of the command bar
 set colorcolumn=80                " color column 80
 set cursorline                    " highlight current line
 set errorbells                    " TODO
@@ -38,6 +50,8 @@ set notitle                       " don't set the title of the Vim window
 set novisualbell                  " no flashing
 set number relativenumber         " set up relative line numbering
                                   " https://jeffkreeftmeijer.com/vim-number/
+set pastetoggle=<F2>              " toggle auto-indenting for code past
+                                  " http://vim.wikia.com/wiki/Toggle_auto-indenting_for_code_paste
 set ruler                         " show row/col and percentage
 set showcmd                       " show command in bottom bar
 set showmatch                     " highlight matching [{()}]
@@ -84,7 +98,7 @@ set noswapfile                    " http://robots.thoughtbot.com/post/1873940257
 set noshowmode                    " hide the current mode
 set printoptions=paper:letter     " US paper
 set scroll=4                      " number of lines to scroll with ^U/^D
-set scrolloff=15                  " keep cursor away from this many chars top/bot
+" set scrolloff=15                  " keep cursor away from this many chars top/bot
 set sessionoptions-=options       " Don't save runtimepath in Vim session (see tpope/vim-pathogen docs)
 set shiftround                    " shift to certain columns, not just n spaces
 set shiftwidth=2                  " number of spaces to shift for autoindent or >,<
@@ -96,8 +110,6 @@ set softtabstop=2                 " number of spaces in tab when editing
 set tabstop=2                     " the One True Tab
 set timeoutlen=1000               " mapping delays
 set ttimeoutlen=10                " key code delays
-set shiftwidth=2
-set tabstop=2                     " number of visual spaces per TAB
 set textwidth=72
 set wrap
 set wrapmargin=2
@@ -110,20 +122,13 @@ set guioptions-=aA
 
 " }}}
 
-" highlighting {{{
-
-" highlight the cursorline
-highlight CursorLine gui=NONE ctermbg=0
-
-" }}}
-
-" file types {{{
+" auto commands {{{
 
 " set certain filetype detection values
 filetype plugin on
 filetype indent on                " load filetype-specific indent files
 
-if has("autocmd")
+if has('autocmd')
   augroup filetype_markdown
     autocmd!
     " make sure all markdown files have the correct filetype set and setup wrapping
@@ -133,6 +138,7 @@ if has("autocmd")
     endif
   augroup END
 
+  " TODO
   " remember last location in file, but not for commit messages.
   " see :help last-position-jump
   " autocmd BufReadPost * if &filetype !~ '^git\c' && line("'\"") > 0 && line("'\"") <= line("$")
@@ -150,22 +156,28 @@ if has("autocmd")
     autocmd!
     " reloads the (g)vimrc files if a configuration file is written
     autocmd BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc source $MYVIMRC | if has('gui_running') | source $MYGVIMRC | endif
-
     " apply modeline operation after sourcing (g)vimrc
     autocmd! BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc set modeline | doautocmd BufRead
   augroup END
 
-  augroup chdir
-    autocmd!
-    " auto change the directory to the current file I'm working on
-    autocmd BufEnter * lcd %:p:h
-  augroup END
+  " TODO
+  " augroup filetype_jsx
+    " autocmd!
+    " autocmd BufNewFile,BufRead *.jsx set filetype=javascript.jsx
+  " augroup END
+
+  " TODO
+  " augroup chdir
+  "   autocmd!
+  "   " auto change the directory to the current file I'm working on
+  "   autocmd BufEnter * lcd %:p:h
+  " augroup END
 
   augroup LineNumberToggle
     autocmd!
     " when buffer gains focus, use relativenumber
-    " when buffer loses focus, use norelativenumber
     autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+    " when buffer loses focus, use norelativenumber
     autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
   augroup END
 
@@ -178,12 +190,25 @@ if has("autocmd")
     autocmd VimResized * redraw!
   augroup END
 
-  " TODO doesn't look like this is actually working
+  augroup CursorLine
+    autocmd!
+    " remove the cursorline whenever you leave the window
+    autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+    autocmd WinLeave * setlocal nocursorline
+  augroup END
+
   augroup CursorLineToggle
     autocmd!
-    " toggle line coloring when entering and leaving insert mode
-    autocmd InsertEnter * highlight CursorLine gui=NONE ctermbg=18
-    autocmd InsertLeave * highlight CursorLine gui=NONE ctermbg=0
+    " toggle cursorline coloring when entering and leaving insert mode
+    autocmd InsertEnter * highlight cursorline gui=NONE guifg=NONE guibg=#002b36 cterm=NONE ctermfg=NONE ctermbg=234
+    autocmd InsertLeave * highlight cursorline gui=NONE guifg=NONE guibg=#073642 cterm=NONE ctermfg=NONE ctermbg=235
+  augroup END
+
+	augroup CursorToggle
+	  autocmd!
+	  " toggle cursor coloring when entering and leaving insert mode
+    autocmd InsertEnter * highlight cursor gui=NONE guifg=NONE guibg=#dc322f cterm=NONE ctermfg=NONE ctermbg=160
+    autocmd InsertLeave * highlight cursor gui=NONE guifg=NONE guibg=#dc322f cterm=NONE ctermfg=NONE ctermbg=160
   augroup END
 endif
 
@@ -193,6 +218,9 @@ endif
 
 " leader is comma
 let mapleader=","
+
+" save my poor shift key
+nmap ; :
 
 " TODO page like a browser
 " nmap <Space> <PageDown>
@@ -225,11 +253,11 @@ nnoremap E $
 nnoremap $ <NOP>
 nnoremap ^ <NOP>
 
-" TODO move between open buffers
-" nnoremap <C-]> :bnext<CR>
-" nnoremap <C-[> :bprev<CR>
+" TODO cycle between open buffers
+nmap <Left> :bnext<CR>
+nmap <Right> :bprev<CR>
 
-" move between windows
+" cycle between splits
 nnoremap <C-J> <C-W>j
 nnoremap <C-K> <C-W>k
 nnoremap <C-H> <C-W>h
@@ -241,19 +269,24 @@ nnoremap <C-L> <C-W>l
 " nnoremap <> <C-W>H
 " nnoremap <> <C-W>L
 
+" TODO this doesn't really work too well
 " highlight last inserted text
 nnoremap gV `[v`]
 
-" edit vimrc/zshrc and load vimrc bindings
+" edit vimrc in a vertical split
 nnoremap <Leader>ev :vsp $MYVIMRC<CR>
+
+" edit zshrc in a vertical split
 nnoremap <Leader>ez :vsp ~/.zshrc<CR>
+
+" load vimrc bindings
 nnoremap <Leader>sv :source $MYVIMRC<CR>
+
+" load gvimrc bindings
+nnoremap <Leader>sgv :source $MYGVIMRC<CR>
 
 " save session
 nnoremap <Leader>s :mksession<CR>
-
-" save my poor shift key
-nmap ; :
 
 " having Ex mode start or showing me the command history
 " is a complete pain in the ass if i mistype
@@ -295,7 +328,7 @@ map <Leader>es :sp %%
 map <Leader>ev :vsp %%
 map <Leader>et :tabe %%
 
-if has("gui_macvim") && has("gui_running")
+if has('gui_macvim') && has('gui_running')
   " MacVim shift+arrow-keys behavior (required in .vimrc)
   let macvim_hig_shift_movement=1
 
@@ -431,22 +464,87 @@ endfunc
 
 " }}}
 
+" NrrwRgn {{{
+" https://github.com/chrisbra/NrrwRgn
+" }}}
+
 " Ack.vim {{{
 " https://github.com/mileszs/ack.vim
 
 " Ack requires ack command
-if executable("ack")
+if executable('ack')
   " use default config
-elseif executable("ack-grep")
-  let g:ackprg="ack-grep -H --nocolor --nogroup --column"
-elseif executable("ag")
-  let g:ackprg="ag --nocolor --nogroup --column"
+elseif executable('ack-grep')
+  let g:ackprg='ack-grep -H --nocolor --nogroup --column'
+elseif executable('ag')
+  let g:ackprg='ag --nocolor --nogroup --column'
 endif
 
-if has("gui_macvim") && has("gui_running")
+if has('gui_macvim') && has('gui_running')
   " Command-shift-F on OSX
   map <D-F> :Ack<Space>
 endif
+
+" }}}
+
+" ALE {{{
+" https://github.com/w0rp/ale
+
+" key mappings for :ALEFix
+nmap <Leader>d <Plug>(ale_fix)
+
+let g:ale_linters = {
+  \ 'jsx': ['stylelint', 'eslint'],
+  \ 'vim': ['vint']
+  \ }
+
+let g:ale_linter_aliases = {
+  \ 'jsx': 'css'
+  \ }
+
+" ALEFix will try and fix your JS code with ESLint.
+let g:ale_fixers = {
+  \ 'javascript': ['eslint'],
+  \ 'vim': ['vint'],
+  \ }
+
+" fix files automatically on save
+let g:ale_fix_on_save = 1
+
+" enable completion where available
+let g:ale_completion_enabled = 1
+
+" keep the sign gutter open
+let g:ale_sign_column_always = 1
+
+" change the signs ALE uses
+" let g:ale_sign_error = '>'
+" let g:ale_sign_warning = '-'
+
+" remove the background color for warnings and errors
+" highlight clear ALEErrorSign
+" highlight clear ALEWarningSign
+
+" disable highlighting
+" let g:ale_set_highlights = 0
+
+" format the echo messages
+let g:ale_echo_msg_error_str = ''
+let g:ale_echo_msg_warning_str = ''
+let g:ale_echo_msg_format = '[%linter%] %s'
+
+" navigate between errors
+nmap <silent> <C-h> <Plug>(ale_previous_wrap)
+nmap <silent> <C-l> <Plug>(ale_next_wrap)
+
+" use the quickfix list instead of the loclist
+let g:ale_set_loclist = 0
+let g:ale_set_quickfix = 1
+
+" can be useful if you are combining ALE with
+" some other plugin which sets quickfix errors, etc.
+" let g:ale_open_list = 1
+" let g:ale_keep_list_window_open = 1
 
 " }}}
 
@@ -487,6 +585,14 @@ let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standar
 
 " }}}
 
+" editorconfig-vim {{{
+" https://github.com/editorconfig/editorconfig-vim
+
+" ensure that this plugin works well with Tim Pope's fugitive,
+let g:EditorConfig_exclude_patterns = ['fugitive://.*']
+
+" }}}
+
 " guifont++.vim {{{
 " https://github.com/vim-scripts/guifontpp.vim/blob/master/plugin/guifont%2B%2B.vim
 
@@ -515,68 +621,80 @@ let g:lightline = {
 
 " lightline-ale {{{
 " https://github.com/maximbaz/lightline-ale
+" TODO these settings overwrite fugitive branch naming for some reason
 
-let g:lightline.component_expand = {
-      \  'linter_checking': 'lightline#ale#checking',
-      \  'linter_warnings': 'lightline#ale#warnings',
-      \  'linter_errors': 'lightline#ale#errors',
-      \  'linter_ok': 'lightline#ale#ok',
-      \ }
-let g:lightline.component_type = {
-      \ 'linter_checking': 'left',
-      \ 'linter_warnings': 'warning',
-      \ 'linter_errors': 'error',
-      \ 'linter_ok': 'left',
-      \ }
-let g:lightline.active = {
-      \ 'right': [[ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ]],
-      \ }
-
-" indicator to use when ALE is in progress
-let g:lightline#ale#indicator_checking = "Linting..."
-
-" indicator to use when there are warnings
-let g:lightline#ale#indicator_warnings = "W "
-
-" indicator to use when there are errors
-let g:lightline#ale#indicator_errors = "E "
-
-" indicator to use when there are no warnings or errors
-let g:lightline#ale#indicator_ok = "OK"
+" let g:lightline.component_expand = {
+"       \  'linter_checking': 'lightline#ale#checking',
+"       \  'linter_warnings': 'lightline#ale#warnings',
+"       \  'linter_errors': 'lightline#ale#errors',
+"       \  'linter_ok': 'lightline#ale#ok',
+"       \ }
+" let g:lightline.component_type = {
+"       \ 'linter_checking': 'left',
+"       \ 'linter_warnings': 'warning',
+"       \ 'linter_errors': 'error',
+"       \ 'linter_ok': 'left',
+"       \ }
+" let g:lightline.active = {
+"       \ 'right': [[ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ]],
+"       \ }
+"
+" " indicator to use when ALE is in progress
+" let g:lightline#ale#indicator_checking = "Linting..."
+"
+" " indicator to use when there are warnings
+" let g:lightline#ale#indicator_warnings = "W "
+"
+" " indicator to use when there are errors
+" let g:lightline#ale#indicator_errors = "E "
+"
+" " indicator to use when there are no warnings or errors
+" let g:lightline#ale#indicator_ok = "OK"
 
 " }}}
 
-" NERDCommenter {{{
+" NERD Commenter {{{
 
 " toggle comments
 map <D-/> <plug>NERDCommenterToggle<CR>
 imap <D-/> <Esc><plug>NERDCommenterToggle<CR>i
 
-" Add spaces after comment delimiters by default
+" add spaces after comment delimiters by default
 let g:NERDSpaceDelims = 1
 
-" Use compact syntax for prettified multi-line comments
+" use compact syntax for prettified multi-line comments
 let g:NERDCompactSexyComs = 1
 
-" Align line-wise comment delimiters flush left instead of following code indentation
+" align line-wise comment delimiters flush left instead of following code indentation
 let g:NERDDefaultAlign = 'left'
 
-" Add your own custom formats or override the defaults
+" add your own custom formats or override the defaults
 let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
 
-" Allow commenting and inverting empty lines (useful when commenting a region)
+" allow commenting and inverting empty lines (useful when commenting a region)
 let g:NERDCommentEmptyLines = 1
 
-" Enable trimming of trailing whitespace when uncommenting
+" enable trimming of trailing whitespace when uncommenting
 let g:NERDTrimTrailingWhitespace = 1
 
 " }}}
 
-" NERDtree {{{
+" NERDTree {{{
 " https://github.com/scrooloose/nerdtree/blob/master/doc/NERDTree.txt
 
 " toggle NERDTree on/off
 nnoremap <F6> :NERDTreeToggle<CR>
+
+" controls whether the NERD tree window centers when the cursor moves
+" within a specified distance to the top/bottom of the window
+let NERDTreeAutoCenter=0
+
+" tells the NERD tree whether to use natural sort order or not when sorting nodes
+let NERDTreeNaturalSort=1
+
+" change the NERDTree root dir
+" set autochdir
+" let NERDTreeChDirMode=2
 
 " tells the NERD tree which files to ignore
 let NERDTreeIgnore=['\.DS_Store$', '\~$']
@@ -584,40 +702,36 @@ let NERDTreeIgnore=['\.DS_Store$', '\~$']
 " tells the NERD tree to respect |'wildignore'|
 let NERDTreeRespectWildIgnore=1
 
-" change the NERDTree root dir
-set autochdir
-let NERDTreeChDirMode=2
-
-" enable line numbers
-let NERDTreeShowLineNumbers=1
-
-" change the default arrows
-let g:NERDTreeDirArrowExpandable = '▸'
-let g:NERDTreeDirArrowCollapsible = '▾'
+" automatically close NerdTree when you open a file
+let NERDTreeQuitOnOpen = 1
 
 " show hidden files in NERDTree
 let NERDTreeShowHidden=1
 
+" enable line numbers
+let NERDTreeShowLineNumbers=1
+
+" change the size of the NERD tree when it is loaded
+let NERDTreeWinSize=25
+
 " disable “Press ? for help”
 let NERDTreeMinimalUI = 1
-" let NERDTreeDirArrows = 1
-
-" automatically close NerdTree when you open a file
-let NERDTreeQuitOnOpen = 1
 
 " automatically delete the buffer of the file you just deleted with NerdTree
 let NERDTreeAutoDeleteBuffer = 1
 
-" tells the NERD tree whether to use natural sort order or not when sorting nodes
-let NERDTreeNaturalSort=1
+" change the default arrows
+" let NERDTreeDirArrows = 1
+" let g:NERDTreeDirArrowExpandable = '▸'
+" let g:NERDTreeDirArrowCollapsible = '▾'
 
 augroup NERDTree
   autocmd!
   " make sure relative line numbers are used
   autocmd FileType nerdtree setlocal relativenumber
 
-  " refresh NERDTree whenever writing to a buffer
-  " autocmd BufWrite * NERDTreeFocus | execute 'normal R' | wincmd p
+  " refresh NERDTree when the user doesn't press a key for the time specified with 'updatetime'
+  " autocmd CursorHold,CursorHoldI * call NERDTreeFocus() | call g:NERDTree.ForCurrentTab().getRoot().refresh() | call g:NERDTree.ForCurrentTab().render() | wincmd w
 
   " open a NERDTree automatically when vim starts up if no files were specified
   autocmd StdinReadPre * let s:std_in=1
@@ -677,51 +791,9 @@ let g:NERDTreeIndicatorMapCustom = {
 
 " }}}
 
-" ALE {{{
-" https://github.com/w0rp/ale
-
-" key mappings for :ALEFix
-nmap <Leader>d <Plug>(ale_fix)
-
-" ALEFix will try and fix your JS code with ESLint.
-let g:ale_fixers = {
-  \ 'javascript': ['eslint']
-  \ }
-
-" fix files automatically on save
-let g:ale_fix_on_save = 1
-
-" enable completion where available
-let g:ale_completion_enabled = 1
-
-" keep the sign gutter open
-let g:ale_sign_column_always = 1
-
-" change the signs ALE uses
-" let g:ale_sign_error = '>'
-" let g:ale_sign_warning = '-'
-
-" remove the background color for warnings and errors
-" highlight clear ALEErrorSign
-" highlight clear ALEWarningSign
-
-" disable highlighting
-" let g:ale_set_highlights = 0
-
-" use the quickfix list instead of the loclist
-let g:ale_set_loclist = 0
-let g:ale_set_quickfix = 1
-
-let g:ale_open_list = 1
-" can be useful if you are combining ALE with
-" some other plugin which sets quickfix errors, etc.
-let g:ale_keep_list_window_open = 1
-
-" }}}
-
 " Syntastic {{{
 
-if has("Syntastic")
+if has('Syntastic')
   set statusline+=%#warningmsg#
   set statusline+=%{SyntasticStatuslineFlag()}
   set statusline+=%*
@@ -743,18 +815,16 @@ endif
 
 " }}}
 
-" Tabular {{{
+" tabular {{{
 
 " key mappings for common tab alignments
-if exists(":Tabularize")
-  " tabs for lining up "="
-  nmap <Leader>t= :Tabularize /=<CR>
-  vmap <Leader>t= :Tabularize /=<CR>
+" tabs for lining up "="
+nmap <Leader>t= :Tabularize /=<CR>
+vmap <Leader>t= :Tabularize /=<CR>
 
-  " tabs for lining up ":"
-  nmap <Leader>t: :Tabularize /:\zs<CR>
-  vmap <Leader>t: :Tabularize /:\zs<CR>
-endif
+" tabs for lining up ":"
+nmap <Leader>t: :Tabularize /:\zs<CR>
+vmap <Leader>t: :Tabularize /:\zs<CR>
 
 " triggers :Tabular whenever a pipe "|" character is inserted
 " https://gist.github.com/tpope/287147
@@ -769,30 +839,6 @@ function! s:align()
     call search(repeat('[^|]*|',column).'\s\{-\}'.repeat('.',position),'ce',line('.'))
   endif
 endfunction
-
-" }}}
-
-" buffergator {{{
-
-
-
-" }}}
-
-" bundler {{{
-
-
-
-" }}}
-
-" dispatch {{{
-
-
-
-" }}}
-
-" easymotion {{{
-
-
 
 " }}}
 
@@ -813,6 +859,52 @@ map g/ <Plug>(incsearch-stay)
 " to enable highlighting and stripping whitespace on save by default
 let g:better_whitespace_enabled=1
 let g:strip_whitespace_on_save=1
+
+" }}}
+
+" vim-buffergator {{{
+" https://github.com/jeetsukumaran/vim-buffergator/blob/master/doc/buffergator.txt
+
+" determines how a new Buffergator window will be opened
+let g:buffergator_viewport_split_policy="n"
+
+" don't expand the application screen to accomodate the Buffergator
+" window
+let g:buffergator_autoexpand_on_split=0
+
+" update the Buffergator window when the buffer list changes
+let g:buffergator_autoupdate=1
+
+" sets the default sort by buffer file basename (followed by directory)
+let g:buffergator_sort_regime="basename"
+
+" show the relative path of each buffer
+let g:buffergator_show_full_directory_path=0
+
+" }}}
+
+" vim-bundler {{{
+
+
+
+" }}}
+
+" vim-closetag {{{
+
+
+
+" }}}
+
+" vim-dispatch {{{
+
+nnoremap <F9> :Dispatch<CR>
+
+autocmd FileType javascript let b:dispatch = 'yarn test'
+
+" }}}
+
+" vim-easymotion {{{
+" https://github.com/easymotion/vim-easymotion
 
 " }}}
 
@@ -842,7 +934,7 @@ nmap <Leader>gp :Git push<CR>
 
 " }}}
 
-" GitGutter {{{
+" vim-gitgutter {{{
 
 " GitGutter styling to use · instead of +/-
 let g:gitgutter_sign_added = '∙'
@@ -908,7 +1000,7 @@ augroup END
 " vim-jsx {{{
 
 " enable JSX on .jsx files only
-let g:jsx_ext_required = 1
+" let g:jsx_ext_required = 1
 
 " restrict JSX to files with the pre-v0.12 @jsx React.DOM pragma
 " let g:jsx_pragma_required = 1

@@ -50,7 +50,7 @@ COMPLETION_WAITING_DOTS="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 
-plugins=(brew bundler cp gem git github heroku osx postgres rails rbenv ruby sublime terminalapp zsh_reload)
+plugins=(brew bundler cp gem git github heroku osx postgres rails rbenv ruby terminalapp zsh_reload)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -80,8 +80,7 @@ export SSH_KEY_PATH="~/.ssh/id_rsa"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # User configuration
-export NODE_PATH="/usr/local/lib/node"
-export PATH="$HOME/.bin:$HOME/bin:/usr/local/bin:$NODE_PATH:$HOME/.rbenv/bin:$PATH:/usr/local/sbin:/usr/local/mysql/bin:/usr/sbin:/usr/bin"
+export PATH="$HOME/.bin:$HOME/bin:/usr/local/bin:$HOME/.rbenv/bin:$PATH:/usr/local/sbin:/usr/local/mysql/bin:/usr/sbin:/usr/bin"
 export MANPATH=/usr/local/man:/usr/local/mysql/man:/user/local/git/man:$MANPATH
 # Pretty print the path
 alias path='echo $PATH | tr -s ":" "\n"'
@@ -154,6 +153,14 @@ export PATH="/usr/local/opt/postgresql@9.5/bin:$PATH"
 export PATH="/usr/local/bin:$PATH"
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
-# export NVM_DIR="$HOME/.nvm"
-# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+git_branch_desc () {
+  for line in $(git branch); do
+    description=$(git config branch.$line.description)
+    if [ -n "$description" ]; then
+      echo "$line     $description"
+    fi
+  done
+}
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
