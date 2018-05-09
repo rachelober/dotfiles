@@ -155,9 +155,9 @@ if has('autocmd')
   augroup filetype_vimrc
     autocmd!
     " reloads the (g)vimrc files if a configuration file is written
-    autocmd BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc source $MYVIMRC | if has('gui_running') | source $MYGVIMRC | endif
+    autocmd BufWritePost                      .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc source $MYVIMRC | if has('gui_running') | source $MYGVIMRC | endif
     " apply modeline operation after sourcing (g)vimrc
-    autocmd! BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc set modeline | doautocmd BufRead
+    autocmd! BufWritePost                     .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc set modeline | doautocmd BufRead
   augroup END
 
   " TODO
@@ -176,18 +176,18 @@ if has('autocmd')
   augroup LineNumberToggle
     autocmd!
     " when buffer gains focus, use relativenumber
-    autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+    autocmd BufEnter,FocusGained,InsertLeave  * set relativenumber
     " when buffer loses focus, use norelativenumber
-    autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+    autocmd BufLeave,FocusLost,InsertEnter    * set norelativenumber
   augroup END
 
   augroup OnResize
     autocmd!
     " resize panes when window/terminal gets resized
-    autocmd VimResized * :wincmd =
+    autocmd VimResized                        * :wincmd =
 
     " redraw every time MacVim is resized
-    autocmd VimResized * redraw!
+    autocmd VimResized                        * redraw!
   augroup END
 
   augroup CursorLine
@@ -200,15 +200,15 @@ if has('autocmd')
   augroup CursorLineToggle
     autocmd!
     " toggle cursorline coloring when entering and leaving insert mode
-    autocmd InsertEnter * highlight cursorline gui=NONE guifg=NONE guibg=#002b36 cterm=NONE ctermfg=NONE ctermbg=234
-    autocmd InsertLeave * highlight cursorline gui=NONE guifg=NONE guibg=#073642 cterm=NONE ctermfg=NONE ctermbg=235
+    autocmd InsertEnter                       * highlight cursorline gui=NONE guifg=NONE guibg=#002b36 cterm=NONE ctermfg=NONE ctermbg=234
+    autocmd InsertLeave                       * highlight cursorline gui=NONE guifg=NONE guibg=#073642 cterm=NONE ctermfg=NONE ctermbg=235
   augroup END
 
 	augroup CursorToggle
 	  autocmd!
 	  " toggle cursor coloring when entering and leaving insert mode
-    autocmd InsertEnter * highlight cursor gui=NONE guifg=NONE guibg=#dc322f cterm=NONE ctermfg=NONE ctermbg=160
-    autocmd InsertLeave * highlight cursor gui=NONE guifg=NONE guibg=#dc322f cterm=NONE ctermfg=NONE ctermbg=160
+    autocmd InsertEnter                       * highlight cursor gui=NONE guifg=NONE guibg=#dc322f cterm=NONE ctermfg=NONE ctermbg=160
+    autocmd InsertLeave                       * highlight cursor gui=NONE guifg=NONE guibg=#dc322f cterm=NONE ctermfg=NONE ctermbg=160
   augroup END
 endif
 
