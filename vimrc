@@ -193,8 +193,8 @@ if has('autocmd')
   augroup CursorLine
     autocmd!
     " remove the cursorline whenever you leave the window
-    autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
-    autocmd WinLeave * setlocal nocursorline
+    autocmd VimEnter,WinEnter,BufWinEnter     * setlocal cursorline
+    autocmd WinLeave                          * if &ft != 'nerdtree' | setlocal nocursorline | endif
   augroup END
 
   augroup CursorLineToggle
