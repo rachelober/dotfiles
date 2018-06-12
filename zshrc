@@ -145,10 +145,6 @@ alias wget='curl -O'
 # http://lethalman.blogspot.com/2009/10/speeding-up-zsh-completion.html
 zstyle ':completion:*' accept-exact '*(N)'
 
-# If there is a local zshrc, load it at the end
-[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
-export PATH="/usr/local/opt/postgresql@9.5/bin:$PATH"
-
 # recommended by brew doctor
 export PATH="/usr/local/bin:$PATH"
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
@@ -164,3 +160,6 @@ git_branch_desc () {
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+
+# If there is a local zshrc, load it at the end
+[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
